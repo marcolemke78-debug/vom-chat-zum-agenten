@@ -97,6 +97,16 @@ with sync_playwright() as p:
             page.click(f'.phase-tab:nth-child({n})')
             no_overflow(page, f'{lid} Phase {n}')
         page.click('.phase-tab:nth-child(1)')
+        if page.locator('.demo').count():
+            total = page.evaluate(f"DEMOS.find(d => d.id === MODULE1.lessons.find(l => l.id === '{lid}').demo).steps.length")
+            for _ in range(total - 1):
+                page.click('.demo-controls .btn-primary')
+            if page.locator('.demo-step').count() != total:
+                problems.append(f'{lid}: Demo zeigt nicht alle {total} Schritte')
+            visible = [b.inner_text() for b in page.locator('.demo-controls button').all() if b.is_visible()]
+            if visible != ['Noch einmal von vorn']:
+                problems.append(f'{lid}: Demo-Ende zeigt falsche Knoepfe {visible}')
+            no_overflow(page, f'{lid} Demo')
         shot(page, f'{lid}-moment')
         page.click('.phase-tab:nth-child(3)')
         shot(page, f'{lid}-praxis')

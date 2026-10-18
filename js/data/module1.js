@@ -15,6 +15,7 @@ const MODULE1 = {
       minutes: 10,
       stand: '2026-10-18',
       terms: ['agent', 'werkzeug'],
+      demo: 'klassenliste',
       moment: { html: '<p>Platzhalter für den Einstieg.</p>' },
       concept: {
         html: '<p>Platzhalter für das Konzept.</p>',
