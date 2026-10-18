@@ -315,7 +315,7 @@ const MODULE1 = {
       practice: {
         html: `<p>Zwei Schritte: Zuerst schaltest du in deinem Werkzeug das Training aus (wo das geht). Dann lässt du dir einen Elternbrief nach dem Platzhalter-Prinzip schreiben. Nimm die vorgegebene Beispiel-Lage unten oder denk dir eine aus. Einen echten Fall nimmst du erst, wenn du das Prinzip sicher beherrschst.</p>`,
         tools: {
-          claude: `<p><strong>Claude</strong>: Klicke unten links auf dein Profil, dann Einstellungen, dann Datenschutz. Schalte dort die Option aus, mit der deine Chats zur Verbesserung der Modelle genutzt werden dürfen. Danach in einem neuen Chat den Text unten einfügen.</p>`,
+          claude: `<p><strong>Claude</strong>: Klicke unten links auf dein Profil, dann Einstellungen, dann Datenschutz. Schalte dort unter Präferenzen die Option aus, mit der deine Chats zur Verbesserung der Modelle genutzt werden dürfen (sie heißt zurzeit auch in der deutschen Oberfläche &bdquo;Help improve our AI models&ldquo;). Danach in einem neuen Chat den Text unten einfügen.</p>`,
           fobizz: `<p><strong>fobizz</strong>: Hier musst du nichts umstellen, fobizz gibt deine Eingaben laut eigener Aussage nicht zum Training weiter. Öffne den KI Chat und füge den Text unten ein. Die Warnung unter dem Eingabefeld gilt trotzdem.</p>`,
           chatgpt: `<p><strong>ChatGPT</strong>: Klicke auf dein Profil, dann Einstellungen, dann Datenkontrollen. Schalte dort &bdquo;Das Modell für alle verbessern&ldquo; aus. Danach in einem neuen Chat den Text unten einfügen.</p>`
         },
@@ -331,7 +331,7 @@ const MODULE1 = {
           'Ich weiß, wo ich die echten Angaben einsetze: erst danach in Word oder im Mailprogramm.'
         ],
         stuck: [
-          { problem: 'Ich finde den Schalter fürs Training nicht.', fix: 'Die Menüs ändern sich gelegentlich. Suche in den Einstellungen nach Datenschutz oder Datenkontrollen. Bei Claude kommst du auch direkt über claude.ai/settings/data-privacy-controls dorthin.' },
+          { problem: 'Ich finde den Schalter fürs Training nicht.', fix: 'Die Menüs ändern sich gelegentlich. Suche in den Einstellungen nach Datenschutz oder Datenkontrollen. Bei Claude kommst du auch direkt über claude.ai/settings/data-privacy-controls dorthin, bei ChatGPT über chatgpt.com/settings/data-controls.' },
           { problem: 'Die KI hat selbst Namen erfunden.', fix: 'Schreib nach: Bitte verwende nur die Platzhalter Schüler A und Klasse X. Erfundene Namen sind kein Datenschutzproblem, aber du musst sie später mühsam ersetzen.' },
           { problem: 'Mein Fall ist so speziell, dass er auch ohne Namen erkennbar wäre.', fix: 'Dann beschreibe ihn allgemeiner: statt &bdquo;der Sohn der Schulleiterin&ldquo; einfach &bdquo;ein Schüler&ldquo;. Im Zweifel den Text lieber selbst schreiben und die KI nur um Formulierungshilfen für einzelne Sätze bitten.' }
         ]
@@ -576,9 +576,9 @@ const MODULE1 = {
         html: `<p>Richte einen <strong>Elternbrief-Assistenten</strong> ein. Die Anweisung unten kannst du übernehmen und an deine Schule anpassen. Teste den Assistenten danach mit einer kurzen Anfrage.</p>`,
         tools: {
           claude: `<ol>
-<li>Links in der Seitenleiste auf Projekte, dann Neues Projekt.</li>
-<li>Name: Elternbriefe. Im Projekt die Anweisungen öffnen (je nach Version Projektanweisungen oder Instructions) und die Anweisung unten einfügen.</li>
-<li>Optional: einen erfundenen Mustertext als Datei hinzufügen.</li>
+<li>Links in der Seitenleiste auf Projekte, dann oben rechts auf Neues Projekt.</li>
+<li>Name: Elternbriefe. Im Projekt rechts neben Anweisungen auf Hinzufügen klicken und die Anweisung unten einfügen.</li>
+<li>Optional: einen erfundenen Mustertext rechts bei Kontext als Datei hinzufügen.</li>
 <li>Im Projekt einen neuen Chat starten und die Test-Anfrage eingeben.</li>
 </ol>
 <p>Im kostenlosen Konto sind bis zu fünf Projekte möglich. Wähle sie mit Bedacht.</p>`,
@@ -590,7 +590,7 @@ const MODULE1 = {
 <li>Chat starten und die Test-Anfrage eingeben.</li>
 </ol>`,
           chatgpt: `<ol>
-<li>Links in der Seitenleiste auf Neues Projekt.</li>
+<li>Links in der Seitenleiste mit der Maus auf Projekte zeigen und auf das Plus klicken.</li>
 <li>Name: Elternbriefe. Im Projekt die Anweisungen öffnen und die Anweisung unten einfügen.</li>
 <li>Im Projekt einen neuen Chat starten und die Test-Anfrage eingeben.</li>
 </ol>`
