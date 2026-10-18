@@ -354,6 +354,15 @@ h3 { font-size: 1.15rem; margin: 1.5rem 0 .5rem; }
   .demo-step { grid-template-columns: 1fr; }
 }
 
+/* ---------- Modultest ---------- */
+
+.test-result { margin: 2rem 0; padding: 1.25rem; border-radius: var(--radius); max-width: var(--measure); scroll-margin-top: 4rem; }
+.test-result h2 { margin-top: 0; }
+.test-result.passed { background: var(--ok-soft); }
+.test-result.not-passed { background: var(--warn-soft); }
+.test-missed { margin-top: 0; }
+.test-missed li { min-height: 44px; display: flex; align-items: center; }
+
 /* ---------- Glossar ---------- */
 
 .glossary-controls { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1.5rem 0; }

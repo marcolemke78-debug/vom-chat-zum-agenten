@@ -538,8 +538,80 @@ const Renderer = {
     else showEmpty();
   },
 
+  // ---------- Modultest ----------
+  // Gewertet wird der ERSTE Versuch je Frage. Danach darf man weiterprobieren,
+  // damit man die richtige Antwort samt Erklaerung trotzdem sieht.
+
   renderTest(course, id, page) {
-    page.appendChild(this.el('h1', '', 'Modultest'));
+    const mod = course.modules.find(m => m.test && m.test.id === id);
+    const t = mod.test;
+    const header = this.el('header', 'lesson-header stage-' + mod.stage.toLowerCase());
+    header.innerHTML = '<p class="lesson-kicker">Modul ' + mod.id + '</p><h1>' + this.esc(t.title) + '</h1>'
+      + '<p class="lesson-meta">' + t.questions.length + ' Fragen, ca. 10 Minuten. Bestanden ab ' + Progress.PASS_PERCENT + ' %.</p>';
+    page.appendChild(header);
+
+    const prev = Progress.getTestResult(id);
+    const intro = this.el('div', 'prose');
+    intro.innerHTML = '<p>Gewertet wird jeweils dein erster Versuch. Danach kannst du weiterprobieren und siehst die Erklärung. Du kannst den Test so oft wiederholen, wie du möchtest. Gespeichert wird dein bestes Ergebnis.</p>'
+      + (prev ? '<p>Dein bisher bestes Ergebnis: <strong>' + prev.best + ' %</strong>' + (prev.passed ? ', bestanden.' : '.') + '</p>' : '');
+    page.appendChild(intro);
+
+    const area = this.el('div', 'quiz-area');
+    page.appendChild(area);
+    const results = [];
+    const start = this.button('Test starten', 'btn btn-primary', () => {
+      start.remove();
+      next(0);
+    });
+    area.appendChild(start);
+
+    const next = (i) => {
+      if (i >= t.questions.length) return finish();
+      const q = t.questions[i];
+      const box = this.el('div', 'quiz-item');
+      box.appendChild(this.el('p', 'quiz-count', 'Frage ' + (i + 1) + ' von ' + t.questions.length));
+      area.appendChild(box);
+      Exercises.render(q, box, () => {
+        const isLast = i === t.questions.length - 1;
+        const btn = this.button(isLast ? 'Auswertung anzeigen' : 'Nächste Frage', 'btn btn-primary quiz-next', () => {
+          btn.remove();
+          next(i + 1);
+        });
+        box.appendChild(btn);
+      }, id + '-' + i, (firstTry) => { results[i] = firstTry; });
+    };
+
+    const finish = () => {
+      const right = results.filter(Boolean).length;
+      const pct = Math.round((right / t.questions.length) * 100);
+      Progress.saveTestResult(id, pct);
+      this.renderSidebar(course, { page: 'test', id });
+      const passed = pct >= Progress.PASS_PERCENT;
+      const box = this.el('section', 'test-result ' + (passed ? 'passed' : 'not-passed'));
+      box.innerHTML = '<h2>' + right + ' von ' + t.questions.length + ' im ersten Versuch richtig: ' + pct + ' %</h2>'
+        + (passed
+          ? '<p><strong>Bestanden.</strong> Du kennst jetzt die Grundlagen, um KI-Chats sicher und geschickt zu nutzen. Modul 2 folgt nach der Pilotphase.</p>'
+          : '<p>Noch nicht ganz. Schau dir die Lektionen unten noch einmal an und versuch es dann erneut. Es zählt dein bestes Ergebnis.</p>');
+      const missed = [...new Set(t.questions.filter((q, i) => !results[i]).map(q => q.lessonId))];
+      if (missed.length) {
+        box.appendChild(this.el('p', '', 'Nochmal ansehen:'));
+        const list = this.el('ul', 'test-missed');
+        missed.forEach(lid => {
+          const found = this.findLesson(course, lid);
+          const li = this.el('li');
+          li.appendChild(this.link(this.esc(found.lesson.title), '#/lektion/' + lid, ''));
+          list.appendChild(li);
+        });
+        box.appendChild(list);
+      }
+      const again = this.button('Test wiederholen', 'btn btn-secondary', () => {
+        this.render(course, { page: 'test', id });
+        window.scrollTo(0, 0);
+      });
+      box.appendChild(again);
+      area.appendChild(box);
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
   }
 };
 

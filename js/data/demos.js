@@ -26,8 +26,8 @@ const DEMOS = [
       },
       {
         kind: 'tool',
-        text: '<code>Datei anlegen: testliste.txt</code><br>Erfundene Namen: Lena Beispiel, Tom Muster, Mira Probe, Jonas Test-Hausen, Ella Vorlage, Ben Platz',
-        note: 'Der Agent testet mit Fantasienamen. Echte Schülerdaten bekommt die KI nie zu sehen. Das Programm verarbeitet die echte Liste später nur auf deinem Rechner.'
+        text: '<code>Datei anlegen: testliste.txt</code><br>Erfundene Namen, alle Klasse 7b: Lena Beispiel, Tom Muster, Mira Probe, Jonas Test-Hausen, Ella Vorlage, Ben Platz',
+        note: 'Der Agent testet mit Fantasienamen. Echte Schülerdaten bekommt die KI nur zu sehen, wenn du sie ihr gibst, und genau das vermeidest du. Die echte Liste verarbeitet später das fertige Programm, ohne KI.'
       },
       {
         kind: 'tool',
@@ -54,7 +54,7 @@ const DEMOS = [
       },
       {
         kind: 'result',
-        text: '<pre>Nachname;Vorname;Klasse\nBeispiel;Lena;7b\nMuster;Tom;7b\nProbe;Mira;7b\nTest-Hausen;Jonas;7b\nVorlage;Ella;7b\nPlatz;Ben;7b</pre>Fertig. Starte das Programm künftig mit deiner echten, kopierten Liste. Es läuft nur auf deinem Rechner, die echten Namen verlassen ihn nicht.',
+        text: '<pre>Nachname;Vorname;Klasse\nBeispiel;Lena;7b\nMuster;Tom;7b\nProbe;Mira;7b\nTest-Hausen;Jonas;7b\nVorlage;Ella;7b\nPlatz;Ben;7b</pre>Fertig. Starte das Programm künftig selbst mit deiner echten, kopierten Liste, nicht über den Agenten. Leg die echte Liste nicht in seinen Arbeitsordner und zeig ihm auch die fertige Importdatei nicht. Dann bleiben die echten Namen auf deinem Rechner.',
         note: 'Werkzeuge, Schleife, Erlaubnisse, Hook: Das alles organisiert die Software um das Sprachmodell herum. Sie heißt Harness. Claude Code ist so ein Harness. Bis du selbst so arbeitest, ist es noch ein Stück Weg, und genau den geht dieser Kurs mit dir.'
       }
     ]

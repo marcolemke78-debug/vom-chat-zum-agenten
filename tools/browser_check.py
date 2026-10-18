@@ -39,42 +39,61 @@ def no_overflow(page, label):
         problems.append(f'{label}: horizontales Scrollen ({over}px)')
 
 
+def solve_item(page, item, ordering_js):
+    """Loest eine einzelne Aufgabe (MC/Zuordnung/Reihenfolge) durch Ausprobieren."""
+    if item.locator('.mc-option').count():
+        for btn in item.locator('.mc-option').all():
+            if btn.is_enabled():
+                btn.click()
+            if item.locator('.mc-option.correct').count():
+                break
+    elif item.locator('.match-item').count():
+        col = item.locator('.matching-col')
+        lefts = col.nth(0).locator('.match-item')
+        rights = col.nth(1).locator('.match-item')
+        for i in range(lefts.count()):
+            for j in range(rights.count()):
+                if rights.nth(j).is_disabled():
+                    continue
+                lefts.nth(i).click()
+                rights.nth(j).click()
+                if lefts.nth(i).is_disabled():
+                    break
+    elif item.locator('.order-item').count():
+        for text in page.evaluate(ordering_js):
+            item.locator('.order-item', has_text=text).first.click()
+
+
 def solve_quiz(page, lesson_id):
-    """Loest den Kurz-Check, indem alle Antworten durchprobiert werden."""
+    """Loest den Kurz-Check einer Lektion."""
     page.click('.phase-tab:nth-child(4)')
+    js = (f"(() => {{ const l = MODULE1.lessons.find(x => x.id === '{lesson_id}'); "
+          f"return l.quiz[document.querySelectorAll('.quiz-item').length - 1].items; }})()")
     for _ in range(10):
         item = page.locator('.quiz-item').last
-        if item.locator('.mc-option').count():
-            for btn in item.locator('.mc-option').all():
-                if btn.is_enabled():
-                    btn.click()
-                if item.locator('.mc-option.correct').count():
-                    break
-        elif item.locator('.match-item').count():
-            col = item.locator('.matching-col')
-            lefts = col.nth(0).locator('.match-item')
-            rights = col.nth(1).locator('.match-item')
-            for i in range(lefts.count()):
-                for j in range(rights.count()):
-                    if rights.nth(j).is_disabled():
-                        continue
-                    lefts.nth(i).click()
-                    rights.nth(j).click()
-                    if lefts.nth(i).is_disabled():
-                        break
-        elif item.locator('.order-item').count():
-            # Richtige Reihenfolge steht in den Daten - aus dem Fenster holen
-            items = page.evaluate(
-                f"(() => {{ const l = MODULE1.lessons.find(x => x.id === '{lesson_id}'); "
-                f"const ex = l.quiz[document.querySelectorAll('.quiz-item').length - 1]; return ex.items; }})()")
-            for text in items:
-                item.locator('.order-item', has_text=text).first.click()
+        solve_item(page, item, js)
         nxt = item.locator('.quiz-next')
         if nxt.count():
             nxt.click()
         if page.locator('.self-check').count():
             return True
     problems.append(f'{lesson_id}: Kurz-Check liess sich nicht abschliessen')
+    return False
+
+
+def solve_test(page):
+    """Spielt den Modultest komplett durch."""
+    page.click('.quiz-area .btn-primary')
+    js = "MODULE1.test.questions[document.querySelectorAll('.quiz-item').length - 1].items"
+    for _ in range(20):
+        item = page.locator('.quiz-item').last
+        solve_item(page, item, js)
+        nxt = item.locator('.quiz-next')
+        if nxt.count():
+            nxt.click()
+        if page.locator('.test-result').count():
+            return True
+    problems.append('Modultest liess sich nicht abschliessen')
     return False
 
 
@@ -160,6 +179,18 @@ with sync_playwright() as p:
     page.fill('.glossary-search', 'xyzxyz')
     if not page.locator('.glossary-empty').is_visible():
         problems.append('Glossar: kein Leer-Hinweis')
+
+    # Modultest komplett
+    page.goto(URL + '#/test/m1test')
+    page.wait_for_selector('.quiz-area .btn-primary')
+    if solve_test(page):
+        shot(page, 'modultest-ergebnis')
+        best = page.evaluate("Progress.getTestResult('m1test')")
+        if not best or not isinstance(best.get('best'), int):
+            problems.append(f'Modultest: Ergebnis nicht gespeichert ({best})')
+        if 'Modultest (' not in page.locator('.sidebar').inner_text():
+            problems.append('Modultest: Ergebnis fehlt in der Seitenleiste')
+        no_overflow(page, 'Modultest Ergebnis')
 
     for route in ['#/glossar', '#/wiederholen', '#/test/m1test']:
         page.goto(URL + route)

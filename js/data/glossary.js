@@ -9,13 +9,13 @@ const GLOSSARY = [
   // ---------- Stufe A ----------
   {
     id: 'sprachmodell', term: 'Sprachmodell (LLM)', stage: 'A', lessonId: 'm1l2',
-    short: 'Das Programm hinter jedem KI-Chat. Es hat aus riesigen Textmengen gelernt, welches Wort wahrscheinlich als Nächstes kommt, und baut so Antworten Wort für Wort auf. LLM steht für Large Language Model.',
-    analogy: 'Wie die Autovervollständigung im Handy, nur unvorstellbar viel belesener: Sie hat fast alles gelesen, aber nichts davon nachgeprüft.'
+    short: 'Das Programm hinter jedem KI-Chat. Es hat aus riesigen Textmengen gelernt, welches Wort wahrscheinlich als Nächstes kommt, und baut so Antworten Wort für Wort auf. Von sich aus schlägt es nicht nach, ob etwas stimmt, außer es hat eine Websuche zur Verfügung. LLM steht für Large Language Model.',
+    analogy: 'Wie die Autovervollständigung im Handy, nur unvorstellbar viel belesener: Sie hat fast alles gelesen, prüft beim Antworten aber meist nichts nach.'
   },
   {
     id: 'token', term: 'Token', stage: 'A', lessonId: 'm1l2',
-    short: 'Die Bausteine, in die ein Sprachmodell Text zerlegt: ganze Wörter, Wortteile oder Satzzeichen. Ein deutsches Wort sind im Schnitt etwa ein bis zwei Token. Länge, Limits und Kosten werden in Token gemessen.',
-    analogy: 'Wie Silben beim Klatschen in der Grundschule: Das Modell liest nicht Buchstabe für Buchstabe, sondern in Häppchen.'
+    short: 'Die Bausteine, in die ein Sprachmodell Text zerlegt: ganze Wörter, Wortteile oder Satzzeichen. Ein deutsches Wort sind oft zwei oder mehr Token, lange Wörter deutlich mehr. Länge, Limits und Kosten werden in Token gemessen.',
+    analogy: 'Wie Legosteine, aus denen Wörter zusammengesetzt werden: Das Modell liest nicht Buchstabe für Buchstabe, sondern in solchen Bausteinen.'
   },
   {
     id: 'kontextfenster', term: 'Kontextfenster', stage: 'A', lessonId: 'm1l2',
@@ -29,7 +29,7 @@ const GLOSSARY = [
   },
   {
     id: 'modell', term: 'Modell (Modellwahl)', stage: 'A', lessonId: 'm1l2',
-    short: 'Jeder Anbieter hat mehrere Modelle: große, gründliche und kleine, schnelle. In vielen Werkzeugen kannst du wählen, zum Beispiel in Claude zwischen Sonnet und Haiku oder in fobizz zwischen Modellen verschiedener Anbieter.',
+    short: 'Jeder Anbieter hat mehrere Modelle: große, gründliche und kleine, schnelle. In vielen Werkzeugen kannst du wählen, zum Beispiel in Claude je nach Tarif zwischen verschiedenen Modellen (etwa Sonnet und Haiku) oder in fobizz zwischen Modellen verschiedener Anbieter.',
     analogy: 'Wie bei Fahrzeugen: Für den Brötchenkauf reicht das Fahrrad, für den Umzug brauchst du den Transporter.'
   },
   {
@@ -54,12 +54,12 @@ const GLOSSARY = [
   },
   {
     id: 'personenbezogen', term: 'Personenbezogene Daten', stage: 'A', lessonId: 'm1l3',
-    short: 'Alle Angaben, mit denen man eine Person erkennen kann: Namen, Noten, Adressen, Fotos, auch Beschreibungen, die eindeutig auf ein Kind zeigen. Sie gehören in keinen KI-Chat.',
+    short: 'Alle Angaben, mit denen man eine Person erkennen kann: Namen, Noten, Adressen, Fotos, auch Beschreibungen, die eindeutig auf ein Kind zeigen. Faustregel: Sie gehören in keinen KI-Chat.',
     analogy: 'Alles, was du auch nicht auf eine Postkarte schreiben würdest, die durch viele Hände geht.'
   },
   {
     id: 'training-optout', term: 'Training ausschalten', stage: 'A', lessonId: 'm1l3',
-    short: 'Viele Anbieter dürfen Chats nutzen, um ihre Modelle weiter zu trainieren. In den Einstellungen kannst du das abschalten: bei Claude unter Einstellungen, Datenschutz; bei ChatGPT unter Einstellungen, Datenkontrollen. fobizz gibt deine Eingaben laut eigener Aussage nicht zum Training weiter.',
+    short: 'Viele Anbieter dürfen Chats nutzen, um ihre Modelle weiter zu trainieren. In den Einstellungen kannst du das abschalten: bei Claude unter Einstellungen, Datenschutz; bei ChatGPT unter Einstellungen, Datenkontrollen. fobizz gibt deine Eingaben laut eigener Aussage nicht zum Training weiter. Wichtig: Das macht personenbezogene Daten im Chat nicht erlaubt.',
     analogy: 'Wie das Häkchen bei der Kundenkarte: Standardmäßig wird oft mitgeschrieben, aber du darfst widersprechen.'
   },
   {
@@ -85,13 +85,13 @@ const GLOSSARY = [
   {
     id: 'harness', term: 'Harness', stage: 'A', lessonId: 'm1l1',
     short: 'Die Software um das Modell herum: Sie gibt ihm Werkzeuge, führt die Schleife aus, merkt sich den Verlauf und achtet auf Regeln und Erlaubnisse. Claude Code ist zum Beispiel ein solches Harness.',
-    analogy: 'Die Werkstatt um einen Motor: Der Motor (das Modell) liefert die Kraft, aber erst Karosserie, Lenkung und Bremsen machen daraus ein Auto, mit dem man fahren kann.'
+    analogy: 'Die Küche, in der eine Küchenhilfe arbeitet: Messer, Herd und Hausregeln. Die Küchenhilfe (das Modell) kann viel, aber erst die Küche macht es möglich, dass sie tatsächlich kocht, und legt fest, was sie darf.'
   },
 
   // ---------- Stufe B ----------
   {
     id: 'gedaechtnis', term: 'Gedächtnis (Memory)', stage: 'B',
-    short: 'Die Fähigkeit eines KI-Chats, sich Dinge über mehrere Gespräche hinweg zu merken, zum Beispiel deine Fächer oder deinen bevorzugten Stil. Du kannst es ansehen, bearbeiten und abschalten.',
+    short: 'Die Fähigkeit eines KI-Chats, sich Dinge über mehrere Gespräche hinweg zu merken, zum Beispiel deine Fächer oder deinen bevorzugten Stil. Du kannst es ansehen, bearbeiten und abschalten. Lass dir nichts Personenbezogenes merken.',
     analogy: 'Wie eine Kollegin, die sich merkt, dass du Mathe und Technik unterrichtest, statt jeden Morgen neu zu fragen.'
   },
   {
@@ -105,7 +105,7 @@ const GLOSSARY = [
     analogy: 'Eine Rezeptkarte in der Schublade: Der Koch holt sie nur heraus, wenn genau dieses Gericht bestellt wird.'
   },
   {
-    id: 'connector', term: 'Connector (MCP)', stage: 'B',
+    id: 'connector', term: 'Connector (MCP)', stage: 'C',
     short: 'Eine Verbindung, über die Claude auf andere Dienste zugreifen kann, etwa Kalender oder Cloud-Speicher. MCP (Model Context Protocol) ist der gemeinsame Standard, nach dem solche Verbindungen gebaut werden.',
     analogy: 'Wie ein Universal-Ladekabel: Ein Stecker-Standard, und plötzlich passt vieles zusammen.'
   },
@@ -113,7 +113,7 @@ const GLOSSARY = [
   // ---------- Stufe C ----------
   {
     id: 'claude-code', term: 'Claude Code', stage: 'C',
-    short: 'Ein Agent von Anthropic, der direkt auf deinem Rechner arbeitet: Dateien lesen und schreiben, Skripte bauen und ausführen. Er läuft im Terminal oder in der Desktop-App, unter macOS und Windows, und braucht mindestens ein Pro-Abo.',
+    short: 'Ein Agent von Anthropic, der direkt auf deinem Rechner arbeitet: Dateien lesen und schreiben, Skripte bauen und ausführen. Er läuft im Terminal oder in der Desktop-App und braucht mindestens ein Pro-Abo. Stand 18.10.2026, die Angebote ändern sich häufig.',
     analogy: 'Statt einer Beraterin am Telefon sitzt jetzt eine Fachkraft an deinem Schreibtisch, die selbst anpacken darf, wenn du es erlaubst.'
   },
   {
@@ -133,7 +133,7 @@ const GLOSSARY = [
   },
   {
     id: 'computer-use', term: 'Computer Use', stage: 'C',
-    short: 'Die Fähigkeit eines Agenten, einen Bildschirm zu sehen und Maus und Tastatur zu bedienen, also Programme zu nutzen wie ein Mensch. Bei Claude als Forschungsvorschau mit Pro-Abo, unter macOS und Windows.',
+    short: 'Die Fähigkeit eines Agenten, einen Bildschirm zu sehen und Maus und Tastatur zu bedienen, also Programme zu nutzen wie ein Mensch. Bei Claude ab dem Pro-Abo. Stand 18.10.2026, Status und unterstützte Systeme ändern sich häufig.',
     analogy: 'Wie ein Praktikant, dem du über die Schulter schaust, während er sich durch ein Programm klickt.'
   },
   {
