@@ -121,6 +121,36 @@ with sync_playwright() as p:
     page.goto(URL + '#/lektion/m9l9')
     page.wait_for_selector('.stairs', timeout=3000)
 
+    # Karteikasten: eine Karte kuenstlich faellig machen, wiederholen, mit "Noch unsicher" bewerten
+    page.evaluate("""(() => {
+      const d = JSON.parse(localStorage.getItem('vcza_v1'));
+      const id = Object.keys(d.cards)[0];
+      d.cards[id].dueDate = Leitner.today();
+      localStorage.setItem('vcza_v1', JSON.stringify(d));
+    })()""")
+    page.goto(URL + '#/start')
+    page.wait_for_selector('.due-box', timeout=3000)
+    page.goto(URL + '#/wiederholen')
+    page.wait_for_selector('.flashcard')
+    shot(page, 'karte-vorn')
+    page.click('.flashcard .btn-primary')
+    shot(page, 'karte-hinten')
+    page.locator('.flashcard .confidence-row button').first.click()
+    page.wait_for_selector('.review-empty', timeout=3000)
+    tomorrow = page.evaluate("Leitner.addDays(Leitner.today(), 1)")
+    due_tomorrow = page.evaluate(f"Progress.getDueCards('{tomorrow}').length")
+    if due_tomorrow < 1:
+        problems.append('Wiederholen: Karte mit "Noch unsicher" ist morgen nicht faellig')
+
+    # Glossar-Suche
+    page.goto(URL + '#/glossar')
+    page.fill('.glossary-search', 'Hook')
+    if page.locator('.glossary-item').count() != 1:
+        problems.append('Glossar: Suche nach Hook liefert nicht genau 1 Treffer')
+    page.fill('.glossary-search', 'xyzxyz')
+    if not page.locator('.glossary-empty').is_visible():
+        problems.append('Glossar: kein Leer-Hinweis')
+
     for route in ['#/glossar', '#/wiederholen', '#/test/m1test']:
         page.goto(URL + route)
         page.wait_for_timeout(200)

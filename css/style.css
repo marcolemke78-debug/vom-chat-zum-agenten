@@ -254,7 +254,7 @@ h3 { font-size: 1.15rem; margin: 1.5rem 0 .5rem; }
 }
 .segment + .segment { border-left: 2px solid var(--accent); }
 .segment.active { background: var(--accent); color: var(--accent-ink); }
-.tool-content > :first-child, .analogy > :last-child { margin-bottom: 0; }
+.analogy > :last-child { margin-bottom: 0; }
 .tool-content > :first-child { margin-top: 0; }
 .tool-content > :last-child { margin-bottom: 0; }
 .tool-content { margin-top: 1rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
@@ -323,6 +323,39 @@ h3 { font-size: 1.15rem; margin: 1.5rem 0 .5rem; }
 .self-check h3 { margin-top: 0; }
 .confidence-row { display: flex; flex-wrap: wrap; gap: .5rem; }
 .lesson-done p { margin-top: 0; }
+
+/* ---------- Glossar ---------- */
+
+.glossary-controls { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1.5rem 0; }
+.glossary-search {
+  flex: 1 1 14rem; min-height: 44px; padding: .5rem .8rem;
+  border: 2px solid var(--line); border-radius: 8px; font: inherit; background: var(--surface);
+}
+.glossary-search:focus { border-color: var(--accent); }
+.glossary-list { margin: 0; max-width: var(--measure); }
+.glossary-item { padding: 1rem 0 1rem 1rem; border-left: 4px solid var(--stage-a); margin-bottom: .75rem; background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; padding-right: 1rem; }
+.glossary-item.stage-b { border-color: var(--stage-b); }
+.glossary-item.stage-c { border-color: var(--stage-c); }
+.glossary-item dt { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; }
+.glossary-item dd { margin: .3rem 0 0; }
+.glossary-analogy { color: var(--ink-soft); font-style: italic; }
+.stage-tag { font-family: var(--sans); font-size: .75rem; font-weight: 600; color: var(--ink-soft); white-space: nowrap; }
+.glossary-empty { color: var(--ink-soft); }
+
+/* ---------- Karteikarten ---------- */
+
+.flashcard {
+  max-width: var(--measure); padding: 1.5rem;
+  background: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--stage-a);
+  border-radius: var(--radius);
+}
+.flashcard.stage-b { border-top-color: var(--stage-b); }
+.flashcard.stage-c { border-top-color: var(--stage-c); }
+.flashcard-term { margin-top: 0; font-size: 1.6rem; }
+.flashcard-ask { color: var(--ink-soft); }
+.confidence-label { flex-basis: 100%; margin: 1rem 0 .25rem; font-weight: 600; }
+.review-empty { max-width: var(--measure); padding: 1.25rem; background: var(--accent-soft); border-radius: var(--radius); }
+.review-empty p { margin-top: 0; }
 
 /* ---------- Schmale Bildschirme ---------- */
 

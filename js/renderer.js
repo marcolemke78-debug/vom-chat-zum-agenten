@@ -425,14 +425,117 @@ const Renderer = {
     panel.appendChild(box);
   },
 
-  // ---------- Glossar, Wiederholen, Modultest (folgen in Task 5 und 8) ----------
+  // ---------- Glossar ----------
 
   renderGlossary(course, page) {
     page.appendChild(this.el('h1', '', 'Glossar'));
+    page.appendChild(this.el('p', 'lead', 'Alle Begriffe des Kurses, jeweils mit einem Bild aus dem Alltag. Nachschlagen ist ausdrücklich erlaubt, auch bei Begriffen aus späteren Modulen.'));
+
+    const controls = this.el('div', 'glossary-controls');
+    const search = document.createElement('input');
+    search.type = 'search';
+    search.className = 'glossary-search';
+    search.placeholder = 'Begriff suchen';
+    search.setAttribute('aria-label', 'Begriff suchen');
+    controls.appendChild(search);
+
+    const filter = this.el('div', 'segmented');
+    filter.setAttribute('aria-label', 'Nach Stufe filtern');
+    let stage = 'all';
+    [['all', 'Alle'], ['A', 'Stufe A'], ['B', 'Stufe B'], ['C', 'Stufe C']].forEach(([key, label]) => {
+      const b = this.button(label, 'segment' + (key === 'all' ? ' active' : ''), () => {
+        stage = key;
+        filter.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+        update();
+      });
+      filter.appendChild(b);
+    });
+    controls.appendChild(filter);
+    page.appendChild(controls);
+
+    const list = this.el('dl', 'glossary-list');
+    const empty = this.el('p', 'glossary-empty', 'Kein Begriff gefunden. Versuch es mit einem kürzeren Suchwort.');
+    page.appendChild(list);
+    page.appendChild(empty);
+
+    const sorted = course.glossary.slice().sort((a, b) => a.term.localeCompare(b.term, 'de'));
+    const update = () => {
+      const q = search.value.trim().toLowerCase();
+      list.innerHTML = '';
+      let shown = 0;
+      sorted.forEach(g => {
+        if (stage !== 'all' && g.stage !== stage) return;
+        if (q && !(g.term + ' ' + g.short).toLowerCase().includes(q)) return;
+        shown++;
+        const item = this.el('div', 'glossary-item stage-' + g.stage.toLowerCase());
+        item.id = 'begriff-' + g.id;
+        item.innerHTML = '<dt>' + this.esc(g.term) + ' <span class="stage-tag">Stufe ' + g.stage + '</span></dt>'
+          + '<dd>' + this.esc(g.short) + '</dd>'
+          + '<dd class="glossary-analogy">' + this.esc(g.analogy) + '</dd>';
+        list.appendChild(item);
+      });
+      empty.hidden = shown > 0;
+    };
+    search.addEventListener('input', update);
+    update();
   },
+
+  // ---------- Wiederholen (Karteikasten) ----------
 
   renderReview(course, page) {
     page.appendChild(this.el('h1', '', 'Wiederholen'));
+    const area = this.el('div', 'review-area');
+    page.appendChild(area);
+    const due = Progress.getDueCards().filter(id => this.term(course, id));
+    const total = due.length;
+
+    const showEmpty = () => {
+      area.innerHTML = '';
+      const next = Progress.getNextDueDate();
+      const box = this.el('div', 'review-empty');
+      if (next) {
+        box.innerHTML = '<p><strong>Heute ist nichts mehr fällig.</strong> Die nächste Wiederholung steht am ' + this.date(next) + ' an.</p>';
+        box.appendChild(this.link('Zurück zum Kurs', Progress.getLastRoute(), 'btn btn-primary'));
+      } else {
+        box.innerHTML = '<p><strong>Dein Karteikasten ist noch leer.</strong> Nach jeder Lektion landen die neuen Begriffe hier und kommen zurück, bevor du sie vergisst.</p>';
+        box.appendChild(this.link('Mit Lektion 1 loslegen', '#/lektion/' + course.modules[0].lessons[0].id, 'btn btn-primary'));
+      }
+      area.appendChild(box);
+    };
+
+    const showCard = (i) => {
+      if (i >= due.length) {
+        this.renderSidebar(course, { page: 'review' });
+        showEmpty();
+        return;
+      }
+      const g = this.term(course, due[i]);
+      area.innerHTML = '';
+      area.appendChild(this.el('p', 'quiz-count', 'Karte ' + (i + 1) + ' von ' + total));
+      const card = this.el('article', 'flashcard stage-' + g.stage.toLowerCase());
+      card.appendChild(this.el('h2', 'flashcard-term', this.esc(g.term)));
+      card.appendChild(this.el('p', 'flashcard-ask', 'Erklär dir den Begriff kurz selbst, bevor du aufdeckst.'));
+      const reveal = this.button('Aufdecken', 'btn btn-primary', () => {
+        reveal.remove();
+        card.querySelector('.flashcard-ask').remove();
+        card.appendChild(this.el('p', '', this.esc(g.short)));
+        card.appendChild(this.el('p', 'glossary-analogy', this.esc(g.analogy)));
+        const row = this.el('div', 'confidence-row');
+        row.appendChild(this.el('p', 'confidence-label', 'Wie gut wusstest du es?'));
+        this.CONFIDENCE.forEach(c => {
+          row.appendChild(this.button(c.label, 'btn btn-secondary', () => {
+            Progress.rateCard(g.id, c.value);
+            showCard(i + 1);
+          }));
+        });
+        card.appendChild(row);
+      });
+      card.appendChild(reveal);
+      area.appendChild(card);
+    };
+
+    if (total) showCard(0);
+    else showEmpty();
   },
 
   renderTest(course, id, page) {
