@@ -407,12 +407,12 @@ const MODULE1 = {
       id: 'm1l4',
       module: 1,
       title: 'Gut fragen',
-      minutes: 13,
+      minutes: 15,
       stand: '2026-10-18',
       terms: ['prompt', 'rkaf'],
       moment: {
         html: `<p>Nach der Fachkonferenz liegen deine Stichpunkte auf dem Tisch: Kürzel, Pfeile, halbe Sätze. Bis Montag soll daraus ein ordentliches Protokoll werden.</p>
-<p>Du fragst die KI: &bdquo;Mach daraus ein Protokoll.&ldquo; Heraus kommt ein Text, der irgendwie nach Protokoll klingt, aber nicht nach eurer Schule: falscher Aufbau, zu lang, Beschlüsse versteckt im Fließtext. Mit vier Zutaten wird aus derselben Anfrage ein Ergebnis, das du fast unverändert verschicken kannst.</p>`
+<p>Du fragst die KI: &bdquo;Mach daraus ein Protokoll.&ldquo; Heraus kommt ein Text, der irgendwie nach Protokoll klingt, aber nicht nach eurer Schule: falscher Aufbau, zu lang, Beschlüsse versteckt im Fließtext. Mit vier Zutaten wird aus derselben Anfrage ein Ergebnis, das du nur noch gegenlesen musst.</p>`
       },
       concept: {
         html: `<h3>Der Prompt ist dein Arbeitsauftrag</h3>
@@ -430,7 +430,7 @@ const MODULE1 = {
 <p>Der erste Entwurf ist selten der letzte. Statt die ganze Frage neu zu stellen, sag der KI im selben Chat, was du ändern willst: &bdquo;Kürzer, bitte.&ldquo; &bdquo;Beschlüsse als Liste am Ende.&ldquo; &bdquo;Weniger förmlich.&ldquo; Die KI hat den ersten Entwurf noch im Blick und baut darauf auf. So arbeitest du wie mit einer Kollegin, der du Rückmeldung gibst.</p>
 <h3>Zwei Sätze, die fast immer helfen</h3>
 <ul>
-<li><strong>&bdquo;Erfinde nichts dazu.&ldquo;</strong> Gerade bei Protokollen und Zusammenfassungen verhindert das, dass die KI Lücken mit Plausiblem füllt.</li>
+<li><strong>&bdquo;Erfinde nichts dazu.&ldquo;</strong> Gerade bei Protokollen und Zusammenfassungen verringert das die Gefahr, dass die KI Lücken mit Plausiblem füllt. Gegenlesen musst du trotzdem.</li>
 <li><strong>&bdquo;Stell mir zuerst Rückfragen, wenn dir etwas fehlt.&ldquo;</strong> Dann fragt die KI nach, statt zu raten.</li>
 </ul>`,
         analogy: {
@@ -439,10 +439,10 @@ const MODULE1 = {
         }
       },
       practice: {
-        html: `<p>Verwandle Stichpunkte in ein Protokoll. Nimm die Beispiel-Stichpunkte unten oder eigene, aber <strong>ohne Namen</strong>: Ersetze Personen durch Kollegin A, Kollege B und so weiter. Probiere zuerst die kurze Version und dann die Version mit allen vier Zutaten. Schärfe das bessere Ergebnis anschließend mindestens einmal nach.</p>`,
+        html: `<p>Verwandle Stichpunkte in ein Protokoll. Nimm die Beispiel-Stichpunkte unten oder erfinde eigene: <strong>keine echten Schülerinnen, Schüler oder Kolleginnen und Kollegen</strong>, auch nicht ohne Namen. Probiere zuerst die kurze Version und dann die Version mit allen vier Zutaten. Schärfe das bessere Ergebnis anschließend mindestens einmal nach.</p>`,
         tools: {
           claude: `<p><strong>Claude</strong>: Öffne zwei neue Chats, einen für die kurze und einen für die ausführliche Version. So beeinflussen sich die beiden Versuche nicht gegenseitig.</p>`,
-          fobizz: `<p><strong>fobizz</strong>: Öffne zwei neue Chats im KI Chat. Tipp: Im Promptlabor unter Tools findest du fertige Prompts für Schulaufgaben. Schau dir an, wie sie aufgebaut sind. Du wirst Rolle, Kontext, Aufgabe und Format wiederfinden.</p>`,
+          fobizz: `<p><strong>fobizz</strong>: Öffne zwei neue Chats im KI Chat. Tipp: Im Promptlabor von fobizz findest du fertige Prompts für Schulaufgaben. Schau dir an, wie sie aufgebaut sind. Du wirst darin oft Rolle, Kontext, Aufgabe und Format wiederfinden.</p>`,
           chatgpt: `<p><strong>ChatGPT</strong>: Öffne zwei neue Chats, einen für die kurze und einen für die ausführliche Version.</p>`
         },
         prompts: [
@@ -462,12 +462,12 @@ const MODULE1 = {
         checklist: [
           'Ich habe beide Versionen ausprobiert und die Ergebnisse verglichen.',
           'Ich kann bei der zweiten Version Rolle, Kontext, Aufgabe und Format zeigen.',
-          'Ich habe ein Ergebnis mindestens einmal nachgeschärft.'
+          'Ich habe ein Ergebnis nachgeschärft und gegen die Stichpunkte gegengelesen.'
         ],
         stuck: [
-          { problem: 'Beide Versionen sehen fast gleich gut aus.', fix: 'Das kommt vor, gute Modelle raten oft geschickt. Achte auf Details: Steht etwas im Protokoll, das nicht in den Stichpunkten war? Genau das verhindert die zweite Version.' },
+          { problem: 'Beide Versionen sehen fast gleich gut aus.', fix: 'Das kommt vor, gute Modelle raten oft geschickt. Achte auf Details: Steht etwas im Protokoll, das nicht in den Stichpunkten war? Genau dieses Risiko verringert die zweite Version.' },
           { problem: 'Die KI hat die Tabelle nicht als Tabelle dargestellt.', fix: 'Schreib nach: Bitte die Aufgaben als Tabelle mit drei Spalten. Beim Kopieren nach Word bleibt die Tabelle meist erhalten. Wenn nicht, hilft Einfügen ohne Formatierung und dann in Word Text in Tabelle umwandeln.' },
-          { problem: 'Ich habe eigene Stichpunkte mit Namen genommen.', fix: 'Lösche den Chat und mach es noch einmal mit Kollegin A, Kollege B. Die echten Namen setzt du hinterher in Word ein, wie in Lektion 3.' }
+          { problem: 'Ich habe eigene Stichpunkte mit Namen genommen.', fix: 'Die Namen sind jetzt beim Anbieter, Löschen macht das nicht rückgängig. Mach die Übung mit Kollegin A, Kollege B weiter und nimm künftig nur erfundene Stichpunkte. Waren echte Schülerdaten dabei, sprich nach den Vorgaben deiner Schule mit der Schulleitung oder dem Datenschutzbeauftragten.' }
         ]
       },
       quiz: [
@@ -487,7 +487,7 @@ const MODULE1 = {
           question: 'Der erste Entwurf eines Elternbriefs ist dir zu förmlich. Was ist am geschicktesten?',
           options: [
             'Die ganze Anfrage in einem neuen Chat noch einmal stellen',
-            'Den Text selbst komplett umschreiben',
+            'Die KI bitten, den Text einfach noch einmal zu schreiben, ohne zu sagen, was stört',
             'Im selben Chat nachschärfen: Bitte weniger förmlich, eher wie ein persönliches Schreiben.',
             'Ein anderes Modell ausprobieren'
           ],
@@ -495,7 +495,7 @@ const MODULE1 = {
           explanation: 'Im selben Chat hat die KI den Entwurf noch im Blick und ändert gezielt nur das, was du ansprichst.',
           wrongExplanations: {
             0: 'Dann fängst du bei null an und bekommst womöglich einen ganz anderen Text, mit neuen Schwächen.',
-            1: 'Kannst du natürlich, aber genau diese Arbeit kann dir die KI mit einem Satz Rückmeldung abnehmen.',
+            1: 'Ohne Rückmeldung rät die KI erneut und trifft den gewünschten Ton nur zufällig. Sag ihr, was stört.',
             3: 'Am Modell liegt es selten. Der Ton ist eine Frage des Auftrags, nicht der Rechenleistung.'
           }
         },
@@ -520,17 +520,17 @@ const MODULE1 = {
           type: 'multiple-choice',
           question: 'Welcher Prompt wird voraussichtlich das brauchbarste Arbeitsblatt liefern?',
           options: [
-            'Mach ein Arbeitsblatt über Brüche.',
-            'Mach ein richtig gutes, abwechslungsreiches Arbeitsblatt über Brüche für meine Klasse.',
-            'Du bist Mathelehrerin. Mach ein Arbeitsblatt über Brüche, bitte ganz ausführlich.',
+            'Du bist Mathelehrerin an einer Gemeinschaftsschule. Mach ein Arbeitsblatt über Brüche mit sechs Aufgaben.',
+            'Klasse 6, Thema Brüche erweitern und kürzen. Mach ein richtig gutes, abwechslungsreiches Arbeitsblatt, das meiner Klasse Spaß macht.',
+            'Du bist Mathelehrerin. Klasse 6 hat Brüche gerade eingeführt. Mach dazu ein Arbeitsblatt, bitte ganz ausführlich und mit allem, was dazugehört.',
             'Du bist Mathelehrerin an einer Gemeinschaftsschule. Klasse 6, Thema Brüche erweitern und kürzen, die Klasse hat das Thema gerade eingeführt. Erstelle sechs Übungsaufgaben mit steigender Schwierigkeit und eine Lösung auf einer zweiten Seite.'
           ],
           correct: 3,
           explanation: 'Nur diese Version enthält alle vier Zutaten: Rolle, Kontext (Klasse, Stand), Aufgabe und Format (Anzahl, Steigerung, Lösung separat).',
           wrongExplanations: {
-            0: 'Hier fehlen Rolle, Kontext und Format. Die KI muss raten, für welche Klasse und in welcher Form.',
-            1: 'Richtig gut und abwechslungsreich sind Wünsche, aber keine Angaben. Die KI weiß immer noch nicht, welche Klasse und welcher Stand.',
-            2: 'Die Rolle ist da, aber Kontext und Format fehlen. Ganz ausführlich führt eher zu einem langen als zu einem passenden Blatt.'
+            0: 'Rolle und Anzahl sind da, aber der Kontext fehlt: Welche Klasse, welches Teilthema, welcher Stand? Die KI muss raten.',
+            1: 'Der Kontext ist da, aber Rolle und Format fehlen. Richtig gut und abwechslungsreich sind Wünsche, keine Angaben.',
+            2: 'Rolle und Kontext sind da, aber das Format fehlt. Ganz ausführlich und mit allem führt eher zu einem langen als zu einem passenden Blatt.'
           }
         }
       ]
@@ -555,7 +555,7 @@ const MODULE1 = {
 <li><strong>Anweisungen:</strong> Wer ist der Assistent, wofür ist er da, welcher Ton, welches Format, welche Regeln? Zum Beispiel: Verwende immer Platzhalter statt Namen.</li>
 <li><strong>Hintergrundwissen:</strong> Dateien, die er kennen soll, etwa ein Mustertext, den du gut findest, oder eure Hausordnung (ohne Personendaten).</li>
 </ul>
-<p>Jeder neue Chat mit diesem Assistenten startet mit diesem Wissen. Du sparst dir die Erklärungen und bekommst gleichbleibende Qualität.</p>
+<p>Jeder neue Chat mit diesem Assistenten startet mit diesem Wissen. Du sparst dir die Erklärungen und bekommst gleichmäßigere Ergebnisse.</p>
 <h3>Wie das in deinem Werkzeug heißt</h3>
 <table>
 <tr><th>Werkzeug</th><th>Name</th><th>Besonderheit</th></tr>
@@ -564,7 +564,7 @@ const MODULE1 = {
 <tr><td>ChatGPT</td><td>Projekt</td><td>Anweisungen und Dateien gelten für alle Chats im Projekt</td></tr>
 </table>
 <h3>Was eine gute Anweisung enthält</h3>
-<p>Du kennst die Zutaten schon aus Lektion 4: Rolle, Kontext, Aufgabe, Format. Dazu kommen feste Regeln, die immer gelten sollen, zum Beispiel das Platzhalter-Prinzip. Fang klein an. Eine halbe Seite Anweisung reicht für den Anfang. Wenn dich etwas an den Ergebnissen stört, ergänzt du die Anweisung um einen Satz.</p>
+<p>Du kennst die Zutaten schon aus Lektion 4: Rolle, Kontext, Aufgabe, Format. Dazu kommen feste Regeln, die immer gelten sollen, zum Beispiel das Platzhalter-Prinzip. Aber Achtung: Eine solche Regel formt die Antwort, sie ersetzt nicht dein Mitdenken bei der Eingabe. Fang klein an. Eine halbe Seite Anweisung reicht für den Anfang. Wenn dich etwas an den Ergebnissen stört, ergänzt du die Anweisung um einen Satz.</p>
 <h3>Ausblick: vom Assistenten zum Skill</h3>
 <p>In Modul 2 lernst du einen nächsten Schritt kennen: <strong>Skills</strong>. Ein Assistent ist ein Ort, an den du gehst. Ein Skill ist eine Anleitung, die Claude von selbst hervorholt, sobald sie passt, egal in welchem Chat. Dein Abschlussprojekt dort ist ein eigener Arbeitsblatt-Skill.</p>`,
         analogy: {
@@ -577,28 +577,28 @@ const MODULE1 = {
         tools: {
           claude: `<ol>
 <li>Links in der Seitenleiste auf Projekte, dann Neues Projekt.</li>
-<li>Name: Elternbriefe. Bei den Projektanweisungen die Anweisung unten einfügen.</li>
-<li>Optional: einen Mustertext ohne Namen als Datei hinzufügen.</li>
+<li>Name: Elternbriefe. Im Projekt die Anweisungen öffnen (je nach Version Projektanweisungen oder Instructions) und die Anweisung unten einfügen.</li>
+<li>Optional: einen erfundenen Mustertext als Datei hinzufügen.</li>
 <li>Im Projekt einen neuen Chat starten und die Test-Anfrage eingeben.</li>
 </ol>
 <p>Im kostenlosen Konto sind bis zu fünf Projekte möglich. Wähle sie mit Bedacht.</p>`,
-          fobizz: `<ol>
+          fobizz: `<p>Vorab: Schon der Klick auf Assistent anlegen legt einen Entwurf an. Brichst du ab, bleibt ein Assistent &bdquo;Beispiel Name&ldquo; in deiner Liste. Den kannst du über das Menü mit den drei Punkten in den Papierkorb verschieben.</p>
+<ol>
 <li>Tools, dann Eigene KI-Assistenten, dann Assistent anlegen.</li>
 <li>Name und kurze Beschreibung eintragen, die Anweisung unten bei Rolle und Instruktionen einfügen.</li>
 <li>Sprachmodell wählen, zum Beispiel Claude Sonnet. Speichern.</li>
 <li>Chat starten und die Test-Anfrage eingeben.</li>
-</ol>
-<p>Achtung: Schon der Klick auf Assistent anlegen legt einen Entwurf an. Brichst du ab, bleibt ein Assistent &bdquo;Beispiel Name&ldquo; in deiner Liste. Den kannst du über das Menü mit den drei Punkten in den Papierkorb verschieben.</p>`,
+</ol>`,
           chatgpt: `<ol>
 <li>Links in der Seitenleiste auf Neues Projekt.</li>
-<li>Name: Elternbriefe. In den Projekteinstellungen die Anweisung unten einfügen.</li>
+<li>Name: Elternbriefe. Im Projekt die Anweisungen öffnen und die Anweisung unten einfügen.</li>
 <li>Im Projekt einen neuen Chat starten und die Test-Anfrage eingeben.</li>
 </ol>`
         },
         prompts: [
           {
             label: 'Anweisung für den Assistenten',
-            text: 'Du unterstützt eine Lehrkraft an einer Gemeinschaftsschule beim Schreiben von Elternbriefen, Erinnerungen und Rückmeldungen an Eltern.\n\nTon: freundlich, wertschätzend, klar. Kurze Sätze, keine Fachbegriffe, keine Vorwürfe. Die Eltern werden mit Sie angesprochen.\n\nFormat: Betreff, Anrede "Liebe Eltern", höchstens 150 Wörter, Gruß mit dem Platzhalter [Name Lehrkraft].\n\nFeste Regeln:\n- Verwende nie echte Namen. Nutze Platzhalter wie Schüler A, Klasse X, Datum Y.\n- Wenn dir eine Angabe fehlt (Datum, Uhrzeit, Ort), setze einen Platzhalter in eckigen Klammern und erfinde nichts.\n- Wenn die Lehrkraft versehentlich einen echten Namen schreibt, weise freundlich darauf hin und verwende trotzdem einen Platzhalter.'
+            text: 'Du unterstützt eine Lehrkraft an einer Gemeinschaftsschule beim Schreiben von Elternbriefen, Erinnerungen und Rückmeldungen an Eltern.\n\nTon: freundlich, wertschätzend, klar. Kurze Sätze, keine Fachbegriffe, keine Vorwürfe. Die Eltern werden mit Sie angesprochen.\n\nFormat: Betreff, Anrede "Liebe Eltern", kurz (etwa acht Sätze), Gruß mit dem Platzhalter [Name Lehrkraft].\n\nFeste Regeln:\n- Verwende nie echte Namen. Nutze Platzhalter wie Schüler A, Klasse X, Datum Y.\n- Wenn dir eine Angabe fehlt (Datum, Uhrzeit, Ort), setze einen Platzhalter in eckigen Klammern und erfinde nichts.\n- Wenn die Lehrkraft versehentlich einen echten Namen schreibt, weise freundlich darauf hin, dass echte Namen nicht in den Chat gehören, und verwende einen Platzhalter.'
           },
           {
             label: 'Test-Anfrage',
@@ -612,8 +612,8 @@ const MODULE1 = {
         ],
         stuck: [
           { problem: 'Der Assistent hat trotzdem einen Namen erfunden.', fix: 'Ergänze die Regel in der Anweisung, zum Beispiel: Erfinde keine Namen, auch keine Beispielnamen. Speichern und in einem neuen Chat testen, denn geänderte Anweisungen gelten erst für neue Chats zuverlässig.' },
-          { problem: 'Der Assistent hält sich nicht an die Wortgrenze.', fix: 'Schreib die Regel deutlicher in die Anweisung, etwa: Höchstens 150 Wörter, das ist eine harte Grenze. Und schärfe im Chat nach: Bitte kürzer.' },
-          { problem: 'Ich finde Projekte in Claude nicht.', fix: 'Projekte findest du in der linken Seitenleiste. Ist sie eingeklappt, öffne sie über das Symbol oben links. In der Handy-App sind Projekte teilweise nur eingeschränkt verfügbar. Richte das Projekt am besten am Rechner ein.' }
+          { problem: 'Der Assistent hält sich nicht an die Wortgrenze.', fix: 'Wortzahlen sind für eine KI nur Richtwerte, sie zählt dabei unzuverlässig. Besser wirken Angaben wie höchstens acht Sätze. Und im Chat nachschärfen: Bitte kürzer.' },
+          { problem: 'Ich finde Projekte in Claude nicht.', fix: 'Projekte findest du in der linken Seitenleiste. Ist sie eingeklappt, öffne sie über das Symbol oben links. Richte das Projekt am besten am Rechner im Browser ein.' }
         ]
       },
       quiz: [
@@ -630,19 +630,18 @@ const MODULE1 = {
           explanation: 'Der Kern sind die einmal festgelegten Anweisungen und Dateien. Du musst nicht mehr jedes Mal von vorn erklären.',
           wrongExplanations: {
             0: 'Welches Modell der Assistent nutzt, ist eine eigene Einstellung. Ein Assistent kann auch mit einem kleinen Modell arbeiten.',
-            2: 'Nein, auch für Assistenten gilt das Platzhalter-Prinzip. Gute Anweisungen erinnern sogar selbst daran.',
-            3: 'Ein Assistent ist immer noch ein Chat: Er antwortet, aber er führt keine Schritte mit Werkzeugen aus. Das kommt erst in Stufe C.'
+            2: 'Nein, auch für Assistenten gilt das Platzhalter-Prinzip. Eine Anweisung kann daran erinnern, aber was du eintippst, ist trotzdem schon beim Anbieter.',
+            3: 'Ein Assistent bleibt ein Chat: Er antwortet auf deine Anfragen, auch wenn er Extras wie eine Websuche nutzen kann. Er arbeitet aber nicht selbstständig in einer Schleife und verändert keine Dateien auf deinem Rechner. Das kommt erst in Stufe C.'
           }
         },
         {
           type: 'matching',
-          question: 'Wie heißt der Assistent in welchem Werkzeug?',
+          question: 'Wo richtest du in welchem Werkzeug einen Assistenten ein?',
           pairs: [
-            { left: 'fobizz', right: 'Eigene KI-Assistenten' },
-            { left: 'Claude', right: 'Projekt (kostenlos bis zu fünf)' },
-            { left: 'ChatGPT', right: 'Projekt' }
+            { left: 'fobizz', right: 'Eigene KI-Assistenten, per Link mit Kolleginnen und Kollegen teilbar' },
+            { left: 'Claude und ChatGPT', right: 'Projekt mit Anweisungen und Dateien' }
           ],
-          explanation: 'Die Namen unterscheiden sich, die Idee ist überall dieselbe: Anweisungen und Dateien einmal festlegen, dann immer wieder nutzen.'
+          explanation: 'Die Namen unterscheiden sich, die Idee ist überall dieselbe: Anweisungen und Dateien einmal festlegen, dann immer wieder nutzen. Im kostenlosen Claude-Konto sind bis zu fünf Projekte möglich.'
         },
         {
           type: 'multiple-choice',
@@ -654,11 +653,11 @@ const MODULE1 = {
             'Verwende nie echte Namen, sondern Platzhalter, und erfinde keine fehlenden Angaben.'
           ],
           correct: 3,
-          explanation: 'So ist das Platzhalter-Prinzip fest eingebaut und wirkt in jedem Chat, ohne dass du daran denken musst.',
+          explanation: 'So bekommst du Briefe mit Platzhaltern, ohne es jedes Mal erklären zu müssen. Wichtig: Die Regel formt nur die Antwort. Was du selbst eintippst, schützt sie nicht. Echte Namen gehören trotzdem nie in den Chat.',
           wrongExplanations: {
             0: 'Elternbriefe sollen eher kurz sein. Eine Mindestlänge führt zu aufgeblähten Texten.',
-            1: 'Das Modell stellst du in den Einstellungen ein, nicht in der Anweisung. Und für Elternbriefe reicht meist ein schnelles Modell.',
-            2: 'Speichern kann ein Assistent nicht selbst, das ist keine Frage der Anweisung. Und Elternbriefe mit echten Namen gehören ohnehin nicht in die Cloud des KI-Anbieters.'
+            1: 'Die Modellwahl ist je nach Werkzeug eine eigene Einstellung, nicht Teil der Anweisung. Und für Elternbriefe reicht meist ein schnelles Modell.',
+            2: 'Chats werden ohnehin im Verlauf gespeichert. Das hat mit der Anweisung nichts zu tun, und Briefe mit echten Namen gehören sowieso nicht dorthin.'
           }
         },
         {
@@ -691,9 +690,9 @@ const MODULE1 = {
         type: 'multiple-choice',
         question: 'Eine Kollegin sagt: &bdquo;ChatGPT kann mir doch auch erklären, wie ich meine Klassenliste umwandle. Wozu brauche ich einen Agenten?&ldquo; Was antwortest du?',
         options: [
-          'Ein Agent erklärt es ausführlicher.',
+          'Ein Agent erklärt es ausführlicher und mit Beispielen, die zur eigenen Schule passen.',
           'Ein Agent erklärt es nicht nur, er erledigt es: Er legt Dateien an, testet und bessert nach.',
-          'Ein Agent ist datenschutzfreundlicher.',
+          'Ein Agent ist datenschutzfreundlicher, weil er die Daten selbst verschlüsselt.',
           'Ein Agent ist kostenlos, ChatGPT nicht.'
         ],
         correct: 1,
@@ -730,14 +729,14 @@ const MODULE1 = {
           'Ich prüfe, ob es die Studie gibt und ob sie das sagt, bevor ich sie zitiere.',
           'Ich übernehme sie, weil so genaue Angaben nicht erfunden sein können.',
           'Ich frage die KI, ob die Studie echt ist, und verlasse mich auf ihre Antwort.',
-          'Ich nehme lieber ein größeres Modell, das halluziniert nie.'
+          'Ich stelle dieselbe Frage einem größeren Modell; wenn es die Studie auch nennt, ist sie echt.'
         ],
         correct: 0,
         explanation: 'Gerade genaue Angaben sind anfällig für Halluzinationen. Prüfen kostet zwei Minuten und erspart eine peinliche Situation.',
         wrongExplanations: {
           1: 'Genau das ist die Falle: Erfundene Quellen sehen genauso detailliert aus wie echte.',
           2: 'Die Nachfrage kann helfen, Unsicherheiten aufzudecken, ist aber keine Prüfung. Das Modell kann sich auch dabei irren.',
-          3: 'Größere Modelle halluzinieren seltener, aber nicht nie. Prüfen musst du trotzdem.'
+          3: 'Größere Modelle halluzinieren seltener, aber nicht nie, und zwei Modelle können denselben Fehler machen. Prüfen musst du trotzdem selbst.'
         }
       },
       {
@@ -813,10 +812,10 @@ const MODULE1 = {
         items: [
           'Training im Werkzeug ausschalten (falls möglich)',
           'Lage allgemein beschreiben, Platzhalter statt Namen',
-          'Entwurf der KI lesen und nachschärfen',
+          'Entwurf der KI lesen und prüfen',
           'Text in Word übernehmen und echte Angaben einsetzen'
         ],
-        explanation: 'Erst die Einstellungen, dann der Prompt mit Platzhaltern, dann das Nachschärfen, und ganz zum Schluss, außerhalb der KI, die echten Angaben.'
+        explanation: 'Erst die Einstellungen, dann der Prompt mit Platzhaltern, dann das Prüfen, und ganz zum Schluss, außerhalb der KI, die echten Angaben.'
       },
       {
         lessonId: 'm1l4',
@@ -844,14 +843,14 @@ const MODULE1 = {
           'Einen neuen Chat mit derselben Frage starten',
           'Das Modell wechseln',
           'Im selben Chat nachschärfen: Bitte auf die Hälfte kürzen, Inhalt beibehalten.',
-          'Den Text so lassen, Eltern lesen ohnehin nur den Anfang'
+          'Die Wortzahl ganz am Anfang in einen neuen Prompt schreiben und alles neu erzeugen lassen'
         ],
         correct: 2,
         explanation: 'Nachschärfen im selben Chat ist fast immer der schnellste Weg: Der Entwurf ist noch da, du änderst gezielt eine Sache.',
         wrongExplanations: {
           0: 'Dann verlierst du den guten Inhalt und bekommst womöglich einen ganz anderen Text.',
           1: 'Die Länge ist eine Frage des Auftrags, nicht des Modells.',
-          3: 'Gerade deshalb lohnt es sich zu kürzen, damit das Wichtige gelesen wird.'
+          3: 'Dann geht der gelungene Inhalt verloren, und Wortzahlen hält die KI ohnehin nur ungefähr ein. Nachschärfen ist schneller.'
         }
       },
       {
@@ -868,7 +867,7 @@ const MODULE1 = {
         explanation: 'Genau dafür gibt es Assistenten und Projekte: Regeln einmal festlegen, dann in jedem Chat nutzen.',
         wrongExplanations: {
           0: 'Das wäre immer noch jedes Mal Arbeit. Ein Assistent nimmt dir genau das ab.',
-          2: 'Assistenten und Projekte gibt es kostenlos, in fobizz, Claude und ChatGPT.',
+          2: 'Projekte gibt es schon im kostenlosen Claude- und ChatGPT-Konto, Assistenten in fobizz im Rahmen der Schullizenz.',
           3: 'Für Texte nach Muster brauchst du keinen Agenten. Ein Assistent reicht völlig und ist viel einfacher.'
         }
       }
