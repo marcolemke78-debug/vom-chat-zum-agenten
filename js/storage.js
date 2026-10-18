@@ -1,5 +1,5 @@
 /**
- * Storage - sicheres Laden und Speichern im Browser (localStorage).
+ * AppStorage - sicheres Laden und Speichern im Browser (localStorage).
  *
  * Problem: In manchen Browsern ist localStorage gesperrt (iOS-Safari im
  * privaten Modus, blockierte Website-Daten). Dann wirft schon der Zugriff
@@ -7,7 +7,7 @@
  * in diesem Fall nur im Arbeitsspeicher (_memory) - sie gehen beim
  * Neuladen verloren, aber nichts stuerzt ab.
  */
-const Storage = {
+const AppStorage = {
   _memory: {},
   _ok: true,
 
@@ -59,4 +59,4 @@ const Storage = {
   }
 };
 
-if (typeof module !== 'undefined') module.exports = Storage;
+if (typeof module !== 'undefined') module.exports = AppStorage;

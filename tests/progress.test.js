@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { mockLocalStorage } = require('./helpers');
 
-globalThis.Storage = require('../js/storage.js');
+globalThis.AppStorage = require('../js/storage.js');
 globalThis.Leitner = require('../js/leitner.js');
 const Progress = require('../js/progress.js');
 
@@ -10,7 +10,7 @@ const TODAY = '2026-10-18';
 
 test.beforeEach(() => {
   globalThis.localStorage = mockLocalStorage();
-  Storage._memory = {};
+  AppStorage._memory = {};
   Leitner.today = () => TODAY;
   Progress.reset();
 });

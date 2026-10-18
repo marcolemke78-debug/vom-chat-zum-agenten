@@ -24,5 +24,4 @@ Wenn du durch bist, würde ich dich gern zehn Minuten fragen, was gut lief und w
 
 ## Notizen aus dem Pilot
 
-- Testperson 1:
-- Testperson 2:
+Notizen zu den Testpersonen nicht hier eintragen, denn dieser Ordner ist öffentlich. Lokal in `pilot-notizen.md` führen (steht in `.gitignore`).

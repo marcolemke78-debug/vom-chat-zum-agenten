@@ -53,3 +53,13 @@ test('Shuffle mit 3 Optionen funktioniert', () => {
   assert.equal(s.options[s.correct], 'z');
   assert.equal(s.options.length, 3);
 });
+
+test('_permutation liefert nie die Ausgangsreihenfolge (n > 1)', () => {
+  for (const n of [2, 3, 4, 5]) {
+    for (let s = 0; s < 200; s++) {
+      const order = Exercises._permutation(n, 'seed-' + s);
+      assert.notDeepEqual(order, [...Array(n).keys()]);
+      assert.deepEqual([...order].sort(), [...Array(n).keys()]);
+    }
+  }
+});

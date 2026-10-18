@@ -52,6 +52,26 @@ if (typeof document !== 'undefined') {
       e.currentTarget.setAttribute('aria-expanded', String(open));
     });
 
+    // Skip-Link: zum Inhalt springen, ohne den Router auszuloesen
+    document.querySelector('.skip-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('content').focus();
+    });
+
+    // Menue auf schmalen Bildschirmen schliessen: Tippen neben das Menue,
+    // auf einen Menue-Link (auch die gerade offene Seite) oder Escape
+    function closeNav() {
+      document.body.classList.remove('nav-open');
+      document.getElementById('menu-toggle').setAttribute('aria-expanded', 'false');
+    }
+    document.getElementById('nav-backdrop').addEventListener('click', closeNav);
+    document.getElementById('sidebar').addEventListener('click', (e) => {
+      if (e.target.closest('a')) closeNav();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
+    });
+
     window.addEventListener('hashchange', show);
     show();
   });

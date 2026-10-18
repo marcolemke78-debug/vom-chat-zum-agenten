@@ -43,7 +43,7 @@ const MODULE1 = {
 <ul>
 <li><strong>Stufe A, Modul 1:</strong> KI-Chats sicher und geschickt nutzen. Geht mit fobizz, ChatGPT oder Claude, kostenlos.</li>
 <li><strong>Stufe B, Modul 2:</strong> Claude als Werkstatt: Projekte, kleine Apps, eigene Skills. Kostenlos im Browser.</li>
-<li><strong>Stufe C, Modul 3:</strong> Echte Agenten wie in der Demo. Dafür braucht es später ein Abo (Claude Pro, rund 20 US-Dollar im Monat). Für diesen Kurs zahlst du nichts.</li>
+<li><strong>Stufe C, Modul 3:</strong> Echte Agenten wie in der Demo. Dafür braucht es später ein Abo (Claude Pro, rund 20 US-Dollar im Monat). Den Kurs selbst gibt es kostenlos.</li>
 </ul>`,
         analogy: {
           title: 'Kochbuch oder Küchenhilfe?',
@@ -96,8 +96,8 @@ const MODULE1 = {
           type: 'multiple-choice',
           question: 'Was unterscheidet einen KI-Agenten von einem KI-Chat?',
           options: [
-            'Der Agent nutzt Werkzeuge und führt Schritte selbst aus, bis die Aufgabe erledigt ist.',
-            'Der Agent nutzt ein besseres Sprachmodell als der Chat.',
+            'Der Agent nutzt Werkzeuge und arbeitet die Schritte selbst ab.',
+            'Der Agent nutzt ein besseres Sprachmodell als der Chat und versteht dich genauer.',
             'Der Agent antwortet schneller und ausführlicher.',
             'Der Agent braucht keine Anweisungen mehr von dir.'
           ],
@@ -120,8 +120,8 @@ const MODULE1 = {
           question: 'Was ist ein Harness?',
           options: [
             'Ein besonders großes Sprachmodell',
-            'Die Software um das Sprachmodell, die ihm Werkzeuge gibt und auf Regeln achtet',
-            'Eine Sicherheitsfunktion, die personenbezogene Daten herausfiltert',
+            'Die Software um das Modell, die Werkzeuge und Regeln bereitstellt',
+            'Eine Sicherheitsfunktion, die personenbezogene Daten vor dem Absenden herausfiltert',
             'Ein anderes Wort für Prompt'
           ],
           correct: 1,
@@ -138,7 +138,7 @@ const MODULE1 = {
           options: [
             'Weil echte Namen das Programm zum Absturz bringen würden',
             'Weil Fantasienamen kürzer sind',
-            'Damit echte Schülerdaten nicht bei der KI landen; die echte Liste verarbeitet später das fertige Programm, das die Lehrkraft selbst startet',
+            'Damit echte Schülerdaten nicht bei der KI landen',
             'Weil die KI keine deutschen Namen kennt'
           ],
           correct: 2,
@@ -170,7 +170,7 @@ const MODULE1 = {
 <p>Hinter jedem KI-Chat steckt ein <strong>Sprachmodell</strong>. Es hat aus riesigen Textmengen gelernt, welches Wort in einem Zusammenhang wahrscheinlich als Nächstes kommt. So baut es Antworten Wort für Wort auf. Das funktioniert erstaunlich gut, aber es bedeutet: Von sich aus prüft das Modell nicht, ob etwas wahr ist. Es weiß, was <em>plausibel klingt</em>. Manche Werkzeuge können zusätzlich im Web suchen. Das hilft, schützt aber nicht vollständig vor Fehlern.</p>
 <p>Genau daher kommt die erfundene Studie. Name, Jahr und Titel klingen zusammen völlig plausibel. Fachleute nennen das <strong>Halluzination</strong>. Am anfälligsten sind genaue Angaben: Quellen, Zahlen, Zitate, Paragrafen.</p>
 <h3>Token und Kontextfenster</h3>
-<p>Das Modell liest keine Buchstaben, sondern <strong>Token</strong>: Wörter oder Wortstücke. Ein deutsches Wort sind im Schnitt ein bis zwei Token. Wichtig wird das beim <strong>Kontextfenster</strong>: So viel Text kann das Modell in einem Gespräch gleichzeitig im Blick behalten. In sehr langen Chats geraten frühe Teile aus dem Blick, und die Antworten werden schlechter. Dann hilft ein neuer Chat, in den du die wichtigsten Punkte kurz einfügst.</p>
+<p>Das Modell liest keine Buchstaben, sondern <strong>Token</strong>: Wörter oder Wortstücke. Ein deutsches Wort sind meist ein bis drei Token, lange Wörter mehr. Wichtig wird das beim <strong>Kontextfenster</strong>: So viel Text kann das Modell in einem Gespräch gleichzeitig im Blick behalten. In sehr langen Chats geraten frühe Teile aus dem Blick, und die Antworten werden schlechter. Dann hilft ein neuer Chat, in den du die wichtigsten Punkte kurz einfügst.</p>
 <h3>Modell und Denktiefe</h3>
 <p>Anbieter haben mehrere <strong>Modelle</strong>: große, gründliche und kleine, schnelle. In fobizz kannst du zum Beispiel zwischen Modellen von OpenAI, Anthropic (Claude), Google und Mistral wählen. Manche Modelle können außerdem vor der Antwort länger nachdenken. Diese <strong>Denktiefe</strong> (englisch Effort) lässt sich in manchen Werkzeugen einstellen. Faustregel: Für eine kurze Mail reicht ein schnelles Modell. Für eine Unterrichtsreihe oder eine knifflige Formulierung lohnt sich ein großes Modell mit mehr Denktiefe.</p>
 <h3>Was folgt daraus für dich?</h3>
@@ -218,9 +218,9 @@ const MODULE1 = {
           type: 'multiple-choice',
           question: 'Warum erfindet ein Sprachmodell manchmal Quellen?',
           options: [
-            'Weil es absichtlich täuschen will',
-            'Weil es Wort für Wort zusammensetzt, was plausibel klingt, ohne von sich aus zu prüfen, ob es stimmt',
-            'Weil es keinen Zugang zu Büchern hatte',
+            'Weil es absichtlich täuschen will, um kompetenter zu wirken',
+            'Weil es zusammensetzt, was plausibel klingt, ohne es zu prüfen',
+            'Weil es beim Training keinen Zugang zu Fachbüchern und Fachzeitschriften hatte',
             'Weil die Frage zu kurz war'
           ],
           correct: 1,
@@ -247,9 +247,9 @@ const MODULE1 = {
           question: 'Du arbeitest seit zwei Stunden im selben Chat an einer Unterrichtsreihe. Die Antworten ignorieren plötzlich Vorgaben vom Anfang. Was hilft am ehesten?',
           options: [
             'Die Vorgaben vom Anfang noch einmal in Großbuchstaben schreiben',
-            'Ein anderes Werkzeug ausprobieren',
-            'Die Seite neu laden',
-            'Einen neuen Chat beginnen und die wichtigsten Vorgaben und den Stand kurz zusammengefasst einfügen'
+            'Ein anderes Werkzeug ausprobieren, zum Beispiel Claude statt ChatGPT',
+            'Die Seite neu laden, damit der Chat wieder frisch reagiert',
+            'Einen neuen Chat beginnen und Vorgaben und Stand kurz zusammenfassen'
           ],
           correct: 3,
           explanation: 'Das Kontextfenster ist voll oder sehr lang geworden. Ein frischer Chat mit einer knappen Zusammenfassung gibt dem Modell wieder einen klaren Blick.',
@@ -263,8 +263,8 @@ const MODULE1 = {
           type: 'multiple-choice',
           question: 'Für welche Aufgabe lohnt sich am ehesten ein großes Modell mit viel Denktiefe?',
           options: [
-            'Eine Terminerinnerung an das Kollegium umformulieren',
-            'Eine differenzierte Unterrichtsreihe mit drei Niveaustufen planen',
+            'Eine Terminerinnerung an das Kollegium freundlicher umformulieren',
+            'Eine Unterrichtsreihe mit drei Niveaustufen planen',
             'Einen Tippfehler in einer Mail finden',
             'Fünf Synonyme für &bdquo;wichtig&ldquo; suchen'
           ],
@@ -342,9 +342,9 @@ const MODULE1 = {
           question: 'Welche Eingabe ist nach dem Platzhalter-Prinzip in Ordnung?',
           options: [
             'Schreibe einen Brief an Familie Yilmaz, weil Emre aus der 7b seit drei Wochen keine Hausaufgaben macht.',
-            'Schreibe einen Brief an die Eltern von Schüler A (Klasse X). Schüler A macht seit drei Wochen keine Hausaufgaben.',
+            'Schreibe einen Brief an die Eltern von Schüler A (Klasse X), der seit drei Wochen keine Hausaufgaben macht.',
             'Schreibe einen Brief an die Eltern unseres einzigen Schülers mit Diabetes in der 7b.',
-            'Fasse diese Notenliste der 7b zusammen und schreibe jedem Kind eine Rückmeldung.'
+            'Fasse diese Notenliste der 7b zusammen und schreibe jedem Kind eine kurze persönliche Rückmeldung.'
           ],
           correct: 1,
           explanation: 'Platzhalter statt Namen, keine erkennbaren Details: So kann die KI helfen, ohne zu erfahren, um wen es geht.',
@@ -371,7 +371,7 @@ const MODULE1 = {
           options: [
             'Ja, denn dann werden die Daten sofort gelöscht.',
             'Ja, aber nur Vornamen.',
-            'Nein. Die Daten landen trotzdem beim Anbieter. Training auszuschalten schützt dich zusätzlich, ersetzt aber nicht das Platzhalter-Prinzip.',
+            'Nein, die Daten landen trotzdem beim Anbieter.',
             'Ja, wenn ich die Namen nur als Datei im Anhang hochlade statt im Text.'
           ],
           correct: 2,
@@ -387,12 +387,12 @@ const MODULE1 = {
           question: 'Eine Kollegin fragt dich, worauf sie beim Einsatz von KI-Chats im Schulalltag achten soll. Welcher Rat ist der beste?',
           options: [
             'Mit fobizz ist alles erlaubt, weil es für Schulen gemacht ist.',
-            'Namen durch Schüler A ersetzen, die Einstellung zum Modell-Training abschalten und bei Unklarheiten die Schulleitung fragen.',
+            'Platzhalter statt Namen, Training abschalten, im Zweifel die Schulleitung fragen.',
             'Personenbezogene Daten sind in Ordnung, wenn man den Chat danach löscht.',
             'Datenschutz betrifft nur Schülerdaten, Daten von Kolleginnen und Kollegen sind kein Problem.'
           ],
           correct: 1,
-          explanation: 'Diese vier Punkte decken fast alle Alltagssituationen ab. Und für die Ausnahmen gibt es die Schulleitung.',
+          explanation: 'Diese drei Punkte decken fast alle Alltagssituationen ab. Und für die Ausnahmen gibt es die Schulleitung.',
           wrongExplanations: {
             0: 'fobizz ist datenschutzfreundlicher als viele andere Werkzeuge, warnt aber selbst ausdrücklich davor, persönliche Daten einzugeben.',
             2: 'Löschen hilft nicht rückwirkend: Die Daten waren beim Anbieter, sobald du sie abgeschickt hast.',
@@ -488,7 +488,7 @@ const MODULE1 = {
           options: [
             'Die ganze Anfrage in einem neuen Chat noch einmal stellen',
             'Die KI bitten, den Text einfach noch einmal zu schreiben, ohne zu sagen, was stört',
-            'Im selben Chat nachschärfen: Bitte weniger förmlich, eher wie ein persönliches Schreiben.',
+            'Im selben Chat nachschärfen: Bitte weniger förmlich, eher persönlich.',
             'Ein anderes Modell ausprobieren'
           ],
           correct: 2,
@@ -503,10 +503,10 @@ const MODULE1 = {
           type: 'multiple-choice',
           question: 'Warum ist der Satz &bdquo;Erfinde nichts dazu&ldquo; bei Protokollen besonders sinnvoll?',
           options: [
-            'Weil die KI sonst Lücken mit plausibel klingenden, aber erfundenen Details füllen kann',
+            'Weil die KI sonst Lücken mit Erfundenem füllen kann',
             'Weil die KI sonst zu kurze Texte schreibt',
-            'Weil der Satz das Training ausschaltet',
-            'Weil Protokolle sonst nicht gespeichert werden'
+            'Weil der Satz für diesen Chat das Training mit deinen Daten ausschaltet',
+            'Weil Protokolle sonst nicht im Verlauf gespeichert werden und verloren gehen'
           ],
           correct: 0,
           explanation: 'Das ist dieselbe Ursache wie bei den erfundenen Studien aus Lektion 2: Das Modell ergänzt, was plausibel klingt. Bei einem Protokoll wäre das fatal.',
@@ -522,8 +522,8 @@ const MODULE1 = {
           options: [
             'Du bist Mathelehrerin an einer Gemeinschaftsschule. Mach ein Arbeitsblatt über Brüche mit sechs Aufgaben.',
             'Klasse 6, Thema Brüche erweitern und kürzen. Mach ein richtig gutes, abwechslungsreiches Arbeitsblatt, das meiner Klasse Spaß macht.',
-            'Du bist Mathelehrerin. Klasse 6 hat Brüche gerade eingeführt. Mach dazu ein Arbeitsblatt, bitte ganz ausführlich und mit allem, was dazugehört.',
-            'Du bist Mathelehrerin an einer Gemeinschaftsschule. Klasse 6, Thema Brüche erweitern und kürzen, die Klasse hat das Thema gerade eingeführt. Erstelle sechs Übungsaufgaben mit steigender Schwierigkeit und eine Lösung auf einer zweiten Seite.'
+            'Du bist Mathelehrerin an einer Gemeinschaftsschule. Klasse 6 hat Brüche gerade eingeführt. Mach dazu ein Arbeitsblatt, bitte ganz ausführlich und mit allem, was dazugehört.',
+            'Du bist Mathelehrerin. Klasse 6 hat Brüche erweitern und kürzen gerade eingeführt. Erstelle sechs Aufgaben mit steigender Schwierigkeit, Lösungen auf Seite 2.'
           ],
           correct: 3,
           explanation: 'Nur diese Version enthält alle vier Zutaten: Rolle, Kontext (Klasse, Stand), Aufgabe und Format (Anzahl, Steigerung, Lösung separat).',
@@ -577,8 +577,9 @@ const MODULE1 = {
         tools: {
           claude: `<ol>
 <li>Links in der Seitenleiste auf Projekte, dann oben rechts auf Neues Projekt.</li>
-<li>Name: Elternbriefe. Im Projekt rechts neben Anweisungen auf Hinzufügen klicken und die Anweisung unten einfügen.</li>
-<li>Optional: einen erfundenen Mustertext rechts bei Kontext als Datei hinzufügen.</li>
+<li>Name: Elternbriefe. Das zweite Feld kannst du leer lassen. Auf Projekt erstellen klicken.</li>
+<li>Im Projekt rechts neben Anweisungen auf Hinzufügen klicken, die Anweisung unten einfügen und auf Anweisungen speichern klicken.</li>
+<li>Optional: einen erfundenen Mustertext rechts neben Kontext über Hinzufügen als Datei hochladen.</li>
 <li>Im Projekt einen neuen Chat starten und die Test-Anfrage eingeben.</li>
 </ol>
 <p>Im kostenlosen Konto sind bis zu fünf Projekte möglich. Wähle sie mit Bedacht.</p>`,
@@ -591,7 +592,8 @@ const MODULE1 = {
 </ol>`,
           chatgpt: `<ol>
 <li>Links in der Seitenleiste mit der Maus auf Projekte zeigen und auf das Plus klicken.</li>
-<li>Name: Elternbriefe. Im Projekt die Anweisungen öffnen und die Anweisung unten einfügen.</li>
+<li>Name: Elternbriefe. Auf Projekt erstellen klicken.</li>
+<li>Im Projekt oben rechts auf die drei Punkte, dann Projekteinstellungen. Die Anweisung unten ins Feld Anweisungen einfügen und auf Speichern klicken.</li>
 <li>Im Projekt einen neuen Chat starten und die Test-Anfrage eingeben.</li>
 </ol>`
         },
@@ -621,10 +623,10 @@ const MODULE1 = {
           type: 'multiple-choice',
           question: 'Was macht einen Assistenten (bzw. ein Projekt) aus?',
           options: [
-            'Er nutzt ein besonders leistungsfähiges Modell.',
-            'Er hat feste Anweisungen und Hintergrundwissen, die in jedem neuen Chat schon gelten.',
+            'Er nutzt ein besonders leistungsfähiges Modell, das es nur in Assistenten gibt.',
+            'Er hat feste Anweisungen und Dateien, die in jedem seiner Chats gelten.',
             'Er darf personenbezogene Daten verarbeiten.',
-            'Er arbeitet selbstständig wie ein Agent.'
+            'Er arbeitet selbstständig wie ein Agent und erledigt Aufgaben ohne Nachfrage.'
           ],
           correct: 1,
           explanation: 'Der Kern sind die einmal festgelegten Anweisungen und Dateien. Du musst nicht mehr jedes Mal von vorn erklären.',
@@ -647,10 +649,10 @@ const MODULE1 = {
           type: 'multiple-choice',
           question: 'Welche Regel gehört auf jeden Fall in die Anweisung eines Elternbrief-Assistenten?',
           options: [
-            'Schreibe immer mindestens 300 Wörter.',
+            'Schreibe immer mindestens 300 Wörter, damit der Brief vollständig wirkt.',
             'Nutze immer das neueste Modell.',
-            'Speichere die Briefe automatisch in der Cloud.',
-            'Verwende nie echte Namen, sondern Platzhalter, und erfinde keine fehlenden Angaben.'
+            'Speichere jeden fertigen Brief automatisch in der Cloud, damit nichts verloren geht.',
+            'Nutze Platzhalter statt Namen und erfinde keine Angaben.'
           ],
           correct: 3,
           explanation: 'So bekommst du Briefe mit Platzhaltern, ohne es jedes Mal erklären zu müssen. Wichtig: Die Regel formt nur die Antwort. Was du selbst eintippst, schützt sie nicht. Echte Namen gehören trotzdem nie in den Chat.',
@@ -665,9 +667,9 @@ const MODULE1 = {
           question: 'Was unterscheidet einen Skill (Modul 2) von einem Assistenten?',
           options: [
             'Ein Skill kostet immer Geld.',
-            'Ein Skill ist nur für Programmierer.',
-            'Einen Assistenten öffnest du gezielt. Einen Skill holt Claude von selbst hervor, sobald er zur Aufgabe passt, egal in welchem Chat.',
-            'Es gibt keinen Unterschied, nur einen anderen Namen.'
+            'Ein Skill ist nur für Programmierer, weil man ihn als Code schreiben muss.',
+            'Den Assistenten öffnest du selbst, den Skill holt Claude bei Bedarf hervor.',
+            'Es gibt keinen Unterschied, Skill ist nur ein anderer Name für Assistent.'
           ],
           correct: 2,
           explanation: 'Der Assistent ist ein Ort, an den du gehst. Der Skill ist eine Rezeptkarte, die Claude selbst aus der Schublade holt, wenn sie gebraucht wird.',
@@ -691,7 +693,7 @@ const MODULE1 = {
         question: 'Eine Kollegin sagt: &bdquo;ChatGPT kann mir doch auch erklären, wie ich meine Klassenliste umwandle. Wozu brauche ich einen Agenten?&ldquo; Was antwortest du?',
         options: [
           'Ein Agent erklärt es ausführlicher und mit Beispielen, die zur eigenen Schule passen.',
-          'Ein Agent erklärt es nicht nur, er erledigt es: Er legt Dateien an, testet und bessert nach.',
+          'Ein Agent erklärt es nicht nur, er legt die Dateien selbst an und testet.',
           'Ein Agent ist datenschutzfreundlicher, weil er die Daten selbst verschlüsselt.',
           'Ein Agent ist kostenlos, ChatGPT nicht.'
         ],
@@ -708,10 +710,10 @@ const MODULE1 = {
         type: 'multiple-choice',
         question: 'Im Agenten-Beispiel greift ein Hook ein, bevor eine Datei überschrieben wird. Wer sorgt dafür, dass diese Regel greift?',
         options: [
-          'Das Sprachmodell erinnert sich daran.',
-          'Die Lehrkraft muss jedes Mal daran denken.',
+          'Das Sprachmodell erinnert sich daran, weil die Regel im Prompt steht.',
+          'Die Lehrkraft muss jedes Mal selbst daran denken und nachfragen.',
           'Die Schulleitung schaltet die Regel frei.',
-          'Das Harness, also die Software um das Modell, führt die Regel automatisch aus.'
+          'Das Harness führt die Regel automatisch aus.'
         ],
         correct: 3,
         explanation: 'Werkzeuge, Schleife, Erlaubnisse und Hooks gehören zum Harness. Darum kann ein Hook nicht vergessen werden.',
@@ -774,10 +776,10 @@ const MODULE1 = {
         type: 'multiple-choice',
         question: 'Ein Kollege will die Notenliste seiner 8a in einen KI-Chat kopieren, damit die KI Zeugnisbemerkungen formuliert. Was rätst du ihm?',
         options: [
-          'Kein Problem, wenn er vorher das Training ausschaltet.',
+          'Kein Problem, wenn er vorher in den Einstellungen das Training ausschaltet.',
           'Kein Problem, wenn er fobizz nutzt.',
-          'Lieber nur die Vornamen eingeben.',
-          'Keine echten Daten eingeben. Er kann sich Textbausteine mit Platzhaltern schreiben lassen und sie selbst zuordnen.'
+          'Lieber nur die Vornamen und die Noten eingeben, ohne Nachnamen.',
+          'Keine echten Daten, nur Textbausteine mit Platzhaltern.'
         ],
         correct: 3,
         explanation: 'Noten mit Namen sind personenbezogene Daten. Mit Platzhaltern bekommt er trotzdem gute Formulierungshilfen.',
@@ -793,8 +795,8 @@ const MODULE1 = {
         question: 'Welche dieser Angaben ist trotz fehlendem Namen personenbezogen?',
         options: [
           'Ein Schüler der Klasse X hat seine Hausaufgaben vergessen.',
-          'Die einzige Schülerin unserer Schule mit Hörgerät hat im Sport Probleme.',
-          'Schüler A und Schüler B haben sich in der Pause gestritten.',
+          'Unsere einzige Schülerin mit Hörgerät hat im Sport Probleme.',
+          'Schüler A und Schüler B aus Klasse X haben sich in der Pause gestritten.',
           'Eine Klasse 7 plant einen Wandertag.'
         ],
         correct: 1,
@@ -812,7 +814,7 @@ const MODULE1 = {
         items: [
           'Training im Werkzeug ausschalten (falls möglich)',
           'Lage allgemein beschreiben, Platzhalter statt Namen',
-          'Entwurf der KI lesen und prüfen',
+          'Entwurf im Chat prüfen und nachschärfen lassen',
           'Text in Word übernehmen und echte Angaben einsetzen'
         ],
         explanation: 'Erst die Einstellungen, dann der Prompt mit Platzhaltern, dann das Prüfen, und ganz zum Schluss, außerhalb der KI, die echten Angaben.'
@@ -824,7 +826,7 @@ const MODULE1 = {
         options: [
           'Erfinde nichts dazu. Markiere Unklares mit [?].',
           'Schreibe besonders ausführlich.',
-          'Du bist ein erfahrener Schulleiter.',
+          'Du bist ein erfahrener Schulleiter, der jede Sitzung genau kennt.',
           'Antworte auf Deutsch.'
         ],
         correct: 0,
@@ -861,7 +863,7 @@ const MODULE1 = {
           'Die Regeln in Großbuchstaben an den Anfang jedes Prompts schreiben',
           'Einen Assistenten bzw. ein Projekt mit festen Anweisungen einrichten',
           'Auf ein kostenpflichtiges Abo wechseln',
-          'Einen Agenten mit Claude Code einrichten'
+          'Einen Agenten mit Claude Code einrichten, der die Rückmeldungen selbst schreibt'
         ],
         correct: 1,
         explanation: 'Genau dafür gibt es Assistenten und Projekte: Regeln einmal festlegen, dann in jedem Chat nutzen.',

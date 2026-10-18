@@ -24,11 +24,11 @@ Alle Werkzeug-Angaben haben den Stand 18.10.2026. KI-Werkzeuge ändern sich schn
 
 ## Datenschutz
 
-Der Kurs speichert den Fortschritt nur im eigenen Browser (localStorage). Es gibt kein Konto, keine Anmeldung und keine Datenübertragung an Dritte. Inhaltlich vermittelt der Kurs eine klare Faustregel: keine personenbezogenen Daten in KI-Chats, Platzhalter nutzen, Training ausschalten, im Zweifel die Schulleitung fragen. Das ist keine Rechtsberatung.
+Der Kurs speichert den Fortschritt nur im eigenen Browser (localStorage). Es gibt kein Konto, keine Anmeldung und keine Weitergabe von Kursdaten an Dritte. Beim Aufruf über GitHub Pages sieht der Hoster (GitHub) technisch bedingt die IP-Adresse. Inhaltlich vermittelt der Kurs eine klare Faustregel: keine personenbezogenen Daten in KI-Chats, Platzhalter nutzen, Training ausschalten, im Zweifel die Schulleitung fragen. Das ist keine Rechtsberatung.
 
 ## Technik
 
-Reines HTML, CSS und JavaScript, ohne Framework, ohne Build, ohne externe Abhängigkeiten. Läuft offline und auf Tablets.
+Reines HTML, CSS und JavaScript, ohne Framework, ohne Build, ohne externe Abhängigkeiten. Läuft auf Tablets und, lokal aus dem Ordner gestartet, auch offline.
 
 - Lokal starten: `python3 -m http.server 8765` im Projektordner, dann http://localhost:8765 öffnen
 - Tests: `node --test tests/`

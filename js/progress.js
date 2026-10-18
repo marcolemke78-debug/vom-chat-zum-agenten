@@ -24,11 +24,11 @@ const Progress = {
   },
 
   _load() {
-    return Storage.load(this.KEY, this._default());
+    return AppStorage.load(this.KEY, this._default());
   },
 
   _save(data) {
-    Storage.save(this.KEY, data);
+    AppStorage.save(this.KEY, data);
   },
 
   // Eine Aenderung am Datenstand: laden, aendern, speichern.

@@ -1,8 +1,8 @@
 """
-Browser-Pruefung fuer "Vom Chat zum Agenten" (Playwright, headless Chromium).
+Browser-Pruefung fuer "Vom Chat zum Agenten" (Playwright, headless Chromium oder WebKit).
 
 Aufruf (lokaler Server muss laufen, z. B. python3 -m http.server 8765):
-  /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 tools/browser_check.py [URL] [SCREENSHOT-ORDNER]
+  /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 tools/browser_check.py [URL] [SCREENSHOT-ORDNER] [chromium|webkit]
 
 Prueft:
   - Konsole ohne Fehler auf allen Seiten
@@ -11,6 +11,8 @@ Prueft:
   - unbekannte Route landet auf der Startseite
   - kein horizontales Scrollen bei 360, 768, 1024, 1280 px Breite
   - App laeuft auch, wenn localStorage gesperrt ist
+  - Menue auf schmalen Bildschirmen schliesst per Hintergrund, Escape, aktivem Link
+  - Skip-Link bleibt auf der aktuellen Seite
 Gibt am Ende "OK" oder eine Fehlerliste aus (Exit-Code 1).
 """
 import sys
@@ -18,7 +20,8 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 URL = sys.argv[1] if len(sys.argv) > 1 else 'http://localhost:8765/'
-SHOTS = Path(sys.argv[2]) if len(sys.argv) > 2 else None
+SHOTS = Path(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2] else None
+ENGINE = sys.argv[3] if len(sys.argv) > 3 else 'chromium'
 problems = []
 
 
@@ -98,7 +101,7 @@ def solve_test(page):
 
 
 with sync_playwright() as p:
-    browser = p.chromium.launch()
+    browser = getattr(p, ENGINE).launch()
 
     # --- Desktop: kompletter Durchlauf ---
     ctx = browser.new_context(viewport={'width': 1280, 'height': 900})
@@ -215,7 +218,37 @@ with sync_playwright() as p:
         shot(page, f'test-{w}')
         page.goto(URL + '#/lektion/' + lesson_ids[0])
         shot(page, f'lektion-{w}')
+        if w < 900:
+            nav_open = "document.body.classList.contains('nav-open')"
+            page.click('#menu-toggle')
+            shot(page, f'menue-{w}')
+            page.wait_for_timeout(400)  # wie ein Mensch: erst schauen, dann tippen
+            page.mouse.click(w - 10, h // 2)
+            if page.evaluate(nav_open):
+                problems.append(f'{w}px: Menue schliesst nicht beim Tippen daneben')
+            page.click('#menu-toggle')
+            page.keyboard.press('Escape')
+            if page.evaluate(nav_open):
+                problems.append(f'{w}px: Menue schliesst nicht mit Escape')
+            page.click('#menu-toggle')
+            page.click(f'.sidebar a[href="#/lektion/{lesson_ids[0]}"]')
+            if page.evaluate(nav_open):
+                problems.append(f'{w}px: Menue schliesst nicht beim Link auf die aktuelle Seite')
         ctx.close()
+
+    # --- Skip-Link ---
+    ctx = browser.new_context(viewport={'width': 1280, 'height': 900})
+    page = ctx.new_page()
+    page.goto(URL + '#/lektion/' + lesson_ids[0])
+    page.wait_for_selector('.phase-tabs')
+    page.focus('.skip-link')  # Safari springt per Tab nicht auf Links
+    page.keyboard.press('Enter')
+    page.wait_for_timeout(200)
+    if not page.locator('.phase-tabs').count():
+        problems.append('Skip-Link verlaesst die Lektion')
+    if page.evaluate("document.activeElement.id") != 'content':
+        problems.append('Skip-Link setzt den Fokus nicht auf den Inhalt')
+    ctx.close()
 
     # --- localStorage gesperrt ---
     ctx = browser.new_context()

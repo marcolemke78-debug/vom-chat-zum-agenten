@@ -88,7 +88,7 @@ const Renderer = {
         sel.removeAllRanges();
         sel.addRange(range);
       }
-      buttonEl.textContent = 'Markiert – mit Strg/Cmd+C kopieren';
+      buttonEl.textContent = 'Markiert – mit Strg/Cmd+C oder lange drücken und Kopieren';
       return false;
     }
   },
@@ -113,7 +113,7 @@ const Renderer = {
   renderNotice() {
     const box = document.getElementById('notice');
     box.innerHTML = '';
-    if (!Storage.available()) {
+    if (!AppStorage.available()) {
       box.appendChild(this.el('p', 'notice',
         'Dein Browser erlaubt gerade kein Speichern (z. B. im privaten Fenster). Du kannst alles nutzen, aber dein Fortschritt geht beim Schließen verloren.'));
     }

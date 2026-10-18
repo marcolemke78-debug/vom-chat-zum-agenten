@@ -14,7 +14,7 @@ const GLOSSARY = [
   },
   {
     id: 'token', term: 'Token', stage: 'A', lessonId: 'm1l2',
-    short: 'Die Bausteine, in die ein Sprachmodell Text zerlegt: ganze Wörter, Wortteile oder Satzzeichen. Ein deutsches Wort sind oft zwei oder mehr Token, lange Wörter deutlich mehr. Länge, Limits und Kosten werden in Token gemessen.',
+    short: 'Die Bausteine, in die ein Sprachmodell Text zerlegt: ganze Wörter, Wortteile oder Satzzeichen. Ein deutsches Wort sind meist ein bis drei Token, lange Wörter mehr. Länge, Limits und Kosten werden in Token gemessen.',
     analogy: 'Wie Legosteine, aus denen Wörter zusammengesetzt werden: Das Modell liest nicht Buchstabe für Buchstabe, sondern in solchen Bausteinen.'
   },
   {
@@ -138,7 +138,7 @@ const GLOSSARY = [
   },
   {
     id: 'cowork', term: 'Cowork', stage: 'C',
-    short: 'Ein Bereich in der Claude-Desktop-App, in dem Claude Aufgaben mit deinen Dateien selbstständig erledigt, ohne Terminal. Nur mit bezahltem Abo; auf Windows-Home-Rechnern startet es laut Nutzerberichten derzeit nicht.',
+    short: 'Ein Bereich in der Claude-Desktop-App, in dem Claude Aufgaben mit deinen Dateien selbstständig erledigt, ohne Terminal. Nur mit bezahltem Abo.',
     analogy: 'Wie eine Assistenz, der du einen Ordner auf den Tisch legst und sagst: Mach daraus bitte eine Übersicht.'
   }
 ];

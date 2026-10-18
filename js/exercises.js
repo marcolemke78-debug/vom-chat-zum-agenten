@@ -34,6 +34,9 @@ const Exercises = {
       k %= factorial;
       order.push(pool.splice(idx, 1)[0]);
     }
+    // Nie die Ausgangsreihenfolge zeigen: Bei Reihenfolge- und Zuordnungs-
+    // aufgaben waere das schon die Loesung.
+    if (n > 1 && order.every((v, i) => v === i)) order.push(order.shift());
     return order;
   },
 
@@ -75,6 +78,7 @@ const Exercises = {
 
   _feedback(el, ok, html) {
     el.className = 'exercise-feedback ' + (ok ? 'correct' : 'incorrect');
+    el.setAttribute('aria-live', 'polite');
     el.innerHTML = html;
     el.hidden = false;
   },
