@@ -34,13 +34,24 @@ if (typeof document !== 'undefined') {
   const allLessonIds = () => COURSE.modules.flatMap(m => m.lessons.map(l => l.id));
   const allTestIds = () => COURSE.modules.filter(m => m.test).map(m => m.test.id);
 
+  let wantTour = false;
+
   function show() {
+    if (location.hash === '#/tour') wantTour = true;
     const route = parseRoute(location.hash, allLessonIds(), allTestIds());
     if (route.page === 'lesson' || route.page === 'test') Progress.setLastRoute(location.hash);
     Renderer.render(COURSE, route);
     document.body.classList.remove('nav-open');
     document.getElementById('menu-toggle').setAttribute('aria-expanded', 'false');
     window.scrollTo(0, 0);
+    // Einfuehrung: beim ersten Besuch der Startseite oder auf Wunsch (#/tour)
+    if (location.hash === '#/tour') history.replaceState(null, '', '#/start');
+    if (route.page === 'start' && (wantTour || !Progress.getTourSeen())) {
+      wantTour = false;
+      Tour.start(() => Progress.setTourSeen());
+    } else {
+      Tour.stop();
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {

@@ -13,6 +13,7 @@ Prueft:
   - App laeuft auch, wenn localStorage gesperrt ist
   - Menue auf schmalen Bildschirmen schliesst per Hintergrund, Escape, aktivem Link
   - Skip-Link bleibt auf der aktuellen Seite
+  - Einfuehrungs-Tour: erscheint beim ersten Besuch, alle Schritte sichtbar, kommt danach nicht wieder
 Gibt am Ende "OK" oder eine Fehlerliste aus (Exit-Code 1).
 """
 import sys
@@ -40,6 +41,42 @@ def no_overflow(page, label):
     over = page.evaluate('document.documentElement.scrollWidth - document.documentElement.clientWidth')
     if over > 1:
         problems.append(f'{label}: horizontales Scrollen ({over}px)')
+
+
+def run_tour(page, label):
+    """Klickt die Einfuehrung durch: jeder Schritt mit Karte und sichtbarem Ziel."""
+    try:
+        page.wait_for_selector('.tour-card', timeout=3000)
+    except Exception:
+        problems.append(f'{label}: Tour erscheint nicht')
+        return
+    for n in range(1, 6):
+        page.wait_for_timeout(250)
+        count = page.locator('.tour-count').inner_text()
+        if count != f'Schritt {n} von 5':
+            problems.append(f'{label}: Tour zeigt "{count}" statt Schritt {n}')
+        box = page.evaluate("""(() => {
+          const f = document.querySelector('.tour-frame').getBoundingClientRect();
+          const c = document.querySelector('.tour-card').getBoundingClientRect();
+          return { frameHidden: document.querySelector('.tour-frame').hidden,
+                   inView: f.bottom > 0 && f.top < innerHeight && f.width > 10,
+                   cardInView: c.top >= 0 && c.bottom <= innerHeight + 1,
+                   overlap: !(c.bottom <= f.top || c.top >= f.bottom || c.right <= f.left || c.left >= f.right),
+                   fits: f.height + c.height + 40 < innerHeight };
+        })()""")
+        if box['frameHidden'] or not box['inView']:
+            problems.append(f'{label}: Tour-Schritt {n}: Ziel nicht sichtbar')
+        if not box['cardInView']:
+            problems.append(f'{label}: Tour-Schritt {n}: Karte ragt aus dem Bildschirm')
+        if box['overlap'] and box['fits']:
+            problems.append(f'{label}: Tour-Schritt {n}: Karte verdeckt das Ziel')
+        no_overflow(page, f'{label} Tour {n}')
+        if SHOTS:
+            SHOTS.mkdir(parents=True, exist_ok=True)
+            page.screenshot(path=str(SHOTS / f'tour-{label}-{n}.png'))
+        page.click('.tour-card .btn-primary')
+    if page.locator('.tour-card').count():
+        problems.append(f'{label}: Tour schliesst nach dem letzten Schritt nicht')
 
 
 def solve_item(page, item, ordering_js):
@@ -109,6 +146,17 @@ with sync_playwright() as p:
     watch_console(page, 'Desktop')
     page.goto(URL)
     page.wait_for_selector('.stairs')
+    run_tour(page, '1280')
+    page.reload()
+    page.wait_for_selector('.stairs')
+    page.wait_for_timeout(300)
+    if page.locator('.tour-card').count():
+        problems.append('Tour erscheint nach dem Durchklicken erneut')
+    page.click('.start-actions a[href="#/tour"]')
+    page.wait_for_selector('.tour-card', timeout=3000)
+    page.keyboard.press('Escape')
+    if page.locator('.tour-card').count():
+        problems.append('Tour schliesst nicht mit Escape')
     shot(page, 'start-1280')
 
     lesson_ids = page.evaluate('MODULE1.lessons.map(l => l.id)')
@@ -206,6 +254,9 @@ with sync_playwright() as p:
         ctx = browser.new_context(viewport={'width': w, 'height': h}, has_touch=True)
         page = ctx.new_page()
         watch_console(page, f'{w}px')
+        page.goto(URL)
+        page.wait_for_selector('.stairs')
+        run_tour(page, f'{w}px')
         for route in ['', '#/lektion/' + lesson_ids[0], '#/glossar', '#/wiederholen', '#/test/m1test']:
             page.goto(URL + route)
             page.wait_for_timeout(200)
@@ -220,6 +271,8 @@ with sync_playwright() as p:
         shot(page, f'lektion-{w}')
         if w < 900:
             nav_open = "document.body.classList.contains('nav-open')"
+            # goto mit reinem #-Wechsel kehrt zurueck, bevor show() gelaufen ist
+            page.wait_for_timeout(300)
             page.click('#menu-toggle')
             shot(page, f'menue-{w}')
             page.wait_for_timeout(400)  # wie ein Mensch: erst schauen, dann tippen

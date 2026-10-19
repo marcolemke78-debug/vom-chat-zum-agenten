@@ -84,3 +84,9 @@ test('lastRoute wird gemerkt', () => {
   Progress.setLastRoute('#/lektion/m1l2');
   assert.equal(Progress.getLastRoute(), '#/lektion/m1l2');
 });
+
+test('Tour gilt anfangs als nicht gesehen und bleibt nach setTourSeen gesehen', () => {
+  assert.equal(Progress.getTourSeen(), false);
+  Progress.setTourSeen();
+  assert.equal(Progress.getTourSeen(), true);
+});

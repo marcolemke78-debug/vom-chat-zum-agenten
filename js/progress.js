@@ -12,6 +12,7 @@
  *   cards      { [termId]: { box, dueDate, lastReviewed } }   (Karteikasten)
  *   tests      { [testId]: { best, passed } }
  *   lastRoute  zuletzt besuchte Seite, z. B. '#/lektion/m1l2'
+ *   tourSeen   Einfuehrung schon gesehen oder uebersprungen
  */
 const Progress = {
   KEY: 'vcza_v1',
@@ -20,7 +21,7 @@ const Progress = {
   PASS_PERCENT: 75,
 
   _default() {
-    return { version: this.VERSION, lessons: {}, checklists: {}, tool: 'claude', cards: {}, tests: {}, lastRoute: '#/start' };
+    return { version: this.VERSION, lessons: {}, checklists: {}, tool: 'claude', cards: {}, tests: {}, lastRoute: '#/start', tourSeen: false };
   },
 
   _load() {
@@ -125,6 +126,14 @@ const Progress = {
 
   setLastRoute(route) {
     this._update(d => { d.lastRoute = route; });
+  },
+
+  getTourSeen() {
+    return !!this._load().tourSeen;
+  },
+
+  setTourSeen() {
+    this._update(d => { d.tourSeen = true; });
   },
 
   reset() {

@@ -159,6 +159,7 @@ const Renderer = {
     const due = Progress.getDueCards().length;
     tools.appendChild(this.link('Wiederholen' + (due ? ' <span class="badge">' + due + '</span>' : ''), '#/wiederholen', 'nav-link' + (route.page === 'review' ? ' active' : '')));
     tools.appendChild(this.link('Glossar', '#/glossar', 'nav-link' + (route.page === 'glossary' ? ' active' : '')));
+    tools.appendChild(this.link('Rundgang durch den Kurs', '#/tour', 'nav-link'));
     nav.appendChild(tools);
   },
 
@@ -196,6 +197,7 @@ const Renderer = {
     } else {
       actions.appendChild(this.link('Mit Lektion 1 loslegen', '#/lektion/' + firstLesson.id, 'btn btn-primary'));
     }
+    actions.appendChild(this.link('Rundgang durch den Kurs', '#/tour', 'btn'));
     page.appendChild(actions);
 
     // Begruessung: faellige Karteikarten (nur hier, kein Dauer-Banner)
