@@ -34,10 +34,8 @@ if (typeof document !== 'undefined') {
   const allLessonIds = () => COURSE.modules.flatMap(m => m.lessons.map(l => l.id));
   const allTestIds = () => COURSE.modules.filter(m => m.test).map(m => m.test.id);
 
-  let wantTour = false;
-
   function show() {
-    if (location.hash === '#/tour') wantTour = true;
+    const wantTour = location.hash === '#/tour';
     const route = parseRoute(location.hash, allLessonIds(), allTestIds());
     if (route.page === 'lesson' || route.page === 'test') Progress.setLastRoute(location.hash);
     Renderer.render(COURSE, route);
@@ -46,9 +44,10 @@ if (typeof document !== 'undefined') {
     window.scrollTo(0, 0);
     // Einfuehrung: beim ersten Besuch der Startseite oder auf Wunsch (#/tour)
     if (location.hash === '#/tour') history.replaceState(null, '', '#/start');
+    // Gilt schon beim Start als gesehen: wer sie verlaesst, bekommt sie nicht erneut
     if (route.page === 'start' && (wantTour || !Progress.getTourSeen())) {
-      wantTour = false;
-      Tour.start(() => Progress.setTourSeen());
+      Progress.setTourSeen();
+      Tour.start();
     } else {
       Tour.stop();
     }

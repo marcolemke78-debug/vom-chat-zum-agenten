@@ -28,7 +28,7 @@ const Tour = {
         target: menu || '.nav-module',
         title: 'Das Kursmenü',
         text: (narrow ? '<p>Über diesen Knopf öffnest du das Kursmenü.</p>' : '')
-          + '<p>Im Menü stehen alle Lektionen und am Ende jedes Moduls ein kurzer Modultest. Ein Haken zeigt, was du schon erledigt hast.</p>'
+          + '<p>Im Menü stehen alle Lektionen und am Ende von Modul 1 ein kurzer Modultest. Ein Haken zeigt, was du schon erledigt hast.</p>'
       },
       {
         target: menu || '.nav-tools',
@@ -40,19 +40,22 @@ const Tour = {
         target: '.module-overview',
         title: 'Dein Fortschritt bleibt auf diesem Gerät',
         text: '<p>Der Kurs speichert deinen Stand nur in diesem Browser auf diesem Gerät, ohne Konto und ohne Anmeldung. Fängst du am Schul-iPad an und machst zu Hause am Laptop weiter, beginnst du dort von vorn.</p>'
-          + '<p><strong>Tipp:</strong> Bleib möglichst bei einem Gerät und einem Browser. Im privaten Fenster wird nichts gespeichert.</p>'
+          + '<p><strong>Tipp:</strong> Bleib möglichst bei einem Gerät und einem Browser. Im privaten Fenster geht dein Stand beim Schließen verloren.</p>'
       }
     ];
+  },
+
+  _narrow() {
+    return window.matchMedia('(max-width: 900px)').matches;
   },
 
   // Tour starten. onDone() wird beim Beenden oder Ueberspringen aufgerufen.
   start(onDone) {
     this.stop();
-    const narrow = window.matchMedia('(max-width: 900px)').matches;
-    this._steps = this.steps(narrow);
+    this._isNarrow = this._narrow();
+    this._steps = this.steps(this._isNarrow);
     this._index = 0;
     this._onDone = onDone;
-    this._lastFocus = document.activeElement;
 
     // Sperrschicht: verhindert Klicks auf die Seite waehrend der Tour
     this._blocker = document.createElement('div');
@@ -65,12 +68,24 @@ const Tour = {
     this._card.setAttribute('aria-modal', 'true');
     this._card.setAttribute('aria-labelledby', 'tour-title');
     document.body.append(this._blocker, this._frame, this._card);
+    // Wischen auf der Abdunklung darf die Seite nicht wegscrollen (iPad)
+    this._blocker.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+    this._blocker.addEventListener('wheel', e => e.preventDefault(), { passive: false });
 
     this._onKey = (e) => {
       if (e.key === 'Escape') this.finish();
       if (e.key === 'Tab') this._trapFocus(e);
     };
-    this._onMove = () => this._place();
+    this._onMove = () => {
+      // iPad gedreht: Menue-Schritte zeigen jetzt auf ein anderes Ziel
+      if (this._narrow() !== this._isNarrow) {
+        this._isNarrow = this._narrow();
+        this._steps = this.steps(this._isNarrow);
+        this._show();
+      } else {
+        this._place();
+      }
+    };
     document.addEventListener('keydown', this._onKey);
     window.addEventListener('resize', this._onMove);
     window.addEventListener('scroll', this._onMove, { passive: true });
@@ -98,9 +113,12 @@ const Tour = {
       });
     });
 
-    // Ziel nach oben holen (unter die Kopfleiste), damit darunter Platz fuer die Karte ist
+    // Ziel nach oben holen (unter die Kopfleiste), damit darunter Platz fuer die
+    // Karte ist. Ziele im Menue scrollt das Menue selbst in Sicht.
     const target = document.querySelector(step.target);
-    if (target) {
+    if (target && target.closest('#sidebar')) {
+      target.scrollIntoView({ block: 'nearest' });
+    } else if (target) {
       const bar = document.querySelector('.topbar');
       const offset = (bar && bar.offsetHeight ? bar.offsetHeight : 0) + 16;
       window.scrollBy(0, target.getBoundingClientRect().top - offset);
@@ -127,7 +145,7 @@ const Tour = {
     let top = window.innerHeight - h - 16;
     if (window.innerHeight - r.bottom - pad >= h + 2 * gap) top = r.bottom + pad + gap;
     else if (r.top - pad >= h + 2 * gap) top = r.top - pad - gap - h;
-    this._card.style.top = Math.max(8, top) + 'px';
+    this._card.style.top = Math.max(8, Math.min(top, window.innerHeight - h - 8)) + 'px';
   },
 
   // Fokus bleibt in der Karte, solange die Tour laeuft
@@ -135,6 +153,7 @@ const Tour = {
     const items = this._card.querySelectorAll('button');
     const first = items[0];
     const lastItem = items[items.length - 1];
+    if (!this._card.contains(document.activeElement)) { e.preventDefault(); first.focus(); return; }
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); lastItem.focus(); }
     else if (!e.shiftKey && document.activeElement === lastItem) { e.preventDefault(); first.focus(); }
   },
@@ -155,7 +174,7 @@ const Tour = {
     this._card.remove();
     this._card = null;
     window.scrollTo(0, 0);
-    if (this._lastFocus && this._lastFocus.focus) this._lastFocus.focus();
+    document.getElementById('content').focus();
   }
 };
 

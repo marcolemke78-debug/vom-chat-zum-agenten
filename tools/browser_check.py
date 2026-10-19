@@ -74,6 +74,14 @@ def run_tour(page, label):
         if SHOTS:
             SHOTS.mkdir(parents=True, exist_ok=True)
             page.screenshot(path=str(SHOTS / f'tour-{label}-{n}.png'))
+        if n == 5:
+            # Seite dahinter verschoben (z. B. Wisch auf dem iPad): Karte bleibt erreichbar
+            page.evaluate("window.scrollBy(0, -2000); window.scrollBy(0, 4000)")
+            page.wait_for_timeout(100)
+            if not page.evaluate("(() => { const c = document.querySelector('.tour-card').getBoundingClientRect(); return c.top >= 0 && c.bottom <= innerHeight + 1; })()"):
+                problems.append(f'{label}: Tour-Karte nach Scrollen nicht mehr sichtbar')
+            if not page.evaluate("document.querySelector('.tour-card').contains(document.activeElement)"):
+                problems.append(f'{label}: Fokus nicht in der Tour-Karte')
         page.click('.tour-card .btn-primary')
     if page.locator('.tour-card').count():
         problems.append(f'{label}: Tour schliesst nach dem letzten Schritt nicht')
